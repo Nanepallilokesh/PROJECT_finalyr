@@ -66,7 +66,7 @@
     <div class="container-fluid sticky-top bg-white shadow-sm">
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-                <a href="index.html" class="navbar-brand">
+                <a href="{{url_for('index')}}" class="navbar-brand">
                     <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -96,8 +96,8 @@
                     <h1 class="display-1 text-red mb-md-4">"Give the gift of life—it costs nothing but means everything."
                     </h1>
                     <div class="pt-2">
-                        <a href="" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Donate Now</a>
-                        <a href="" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
+                        <a href="{{url_for('Register')}}" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Donate Now</a>
+                        <a href="{{url_for('Contact')}}" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,6 @@
     <!-- Hero End -->
 
 
-    <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row gx-5">
@@ -118,14 +117,29 @@
                 <div class="col-lg-7">
                     <div class="mb-4">
                         <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
-                        <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
+                        <h1 class="display-4">"Best for successfull Blood Donation"</h1>
                     </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                    <pre>Welcome to the Blood Donation Management System, a platform dedicated to bridging the gap 
+between life-savers and those in need. Our mission is to create a streamlined, efficient,
+and transparent system for connecting blood donors and seekers, ensuring that every patient 
+in need receives timely help.
+<mark><h5>OUR VISION</h5></mark>
+We envision a world where no life is lost due to the unavailability of blood. By leveraging 
+technology and community support, we strive to make blood donation a simple and rewarding 
+experience for all.
+<mark><h5>OUR MISSION</h5></mark>
+<mark>Empower Donors:</mark> Provide an easy-to-use platform where donors can register, track
+ their donations, and be recognized for their life-saving contributions.
+<mark>Support Seekers:</mark> Offer hospitals and patients a quick and reliable way to find 
+matching donors, reducing delays in critical situations.
+<mark>Promote Awareness:</mark> Educate the community about the importance of blood donation 
+and encourage active participation.
+                    </pre>
                     <div class="row g-3 pt-3">
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small></h6>
+                                <h6 class="mb-0">Healthy<small class="d-block text-primary">Donations</small></h6>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
@@ -137,13 +151,13 @@
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
-                                <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small></h6>
+                                <h6 class="mb-0">Gaminification<small class="d-block text-primary">rewards</small></h6>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
-                                <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small></h6>
+                                <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
+                                <h6 class="mb-0">Healthy<small class="d-block text-primary">dietary</small></h6>
                             </div>
                         </div>
                     </div>
@@ -152,14 +166,13 @@
         </div>
     </div>
     <!-- About End -->
-    
 
     <!-- Services Start -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5" style="max-width: 500px;">
                 <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Services</h5>
-                <h1 class="display-4">Excellent Medical Services</h1>
+                <h1 class="display-4">Excellent Donation Services</h1>
             </div>
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
@@ -167,8 +180,8 @@
                         <div class="service-icon mb-4">
                             <i class="fa fa-2x fa-user-md text-white"></i>
                         </div>
-                        <h4 class="mb-3">Emergency Care</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                        <h4 class="mb-3">Food Suggestion</h4>
+                        <p class="m-0">"After each successful donation, personalized dietary recommendations are provided to both donors and recipients, promoting optimal recovery and well-being."</p>
                         <a class="btn btn-lg btn-primary rounded-pill" href="">
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -179,8 +192,8 @@
                         <div class="service-icon mb-4">
                             <i class="fa fa-2x fa-procedures text-white"></i>
                         </div>
-                        <h4 class="mb-3">Operation & Surgery</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                        <h4 class="mb-3">Emergency Care</h4>
+                        <p class="m-0">"Individuals in urgent need of blood during critical situations can receive timely transfusions with minimal delay, ensuring swift and efficient medical intervention."</p>
                         <a class="btn btn-lg btn-primary rounded-pill" href="">
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -191,303 +204,21 @@
                         <div class="service-icon mb-4">
                             <i class="fa fa-2x fa-stethoscope text-white"></i>
                         </div>
-                        <h4 class="mb-3">Outdoor Checkup</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                        <h4 class="mb-3">Gaminification</h4>
+                        <p class="m-0">
+                            "To foster engagement and recognize contributions, our gamification system rewards donors with redeemable points for every successful donation, transforming acts of generosity into a gratifying experience."</p>
                         <a class="btn btn-lg btn-primary rounded-pill" href="">
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon mb-4">
-                            <i class="fa fa-2x fa-ambulance text-white"></i>
-                        </div>
-                        <h4 class="mb-3">Ambulance Service</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
-                        <a class="btn btn-lg btn-primary rounded-pill" href="">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon mb-4">
-                            <i class="fa fa-2x fa-pills text-white"></i>
-                        </div>
-                        <h4 class="mb-3">Medicine & Pharmacy</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
-                        <a class="btn btn-lg btn-primary rounded-pill" href="">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon mb-4">
-                            <i class="fa fa-2x fa-microscope text-white"></i>
-                        </div>
-                        <h4 class="mb-3">Blood Testing</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
-                        <a class="btn btn-lg btn-primary rounded-pill" href="">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Services End -->
+               
+
+    
 
 
-    <!-- Appointment Start -->
-    <div class="container-fluid bg-primary my-5 py-5">
-        <div class="container py-5">
-            <div class="row gx-5">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="mb-4">
-                        <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Appointment</h5>
-                        <h1 class="display-4">Make An Appointment For Your Family</h1>
-                    </div>
-                    <p class="text-white mb-5">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
-                    <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="">Find Doctor</a>
-                    <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="">Read More</a>
-                </div>
-                <div class="col-lg-6">
-                    <div class="bg-white text-center rounded p-5">
-                        <h1 class="mb-4">Book An Appointment</h1>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" style="height: 55px;">
-                                        <option selected>Choose Department</option>
-                                        <option value="1">Department 1</option>
-                                        <option value="2">Department 2</option>
-                                        <option value="3">Department 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" style="height: 55px;">
-                                        <option selected>Select Doctor</option>
-                                        <option value="1">Doctor 1</option>
-                                        <option value="2">Doctor 2</option>
-                                        <option value="3">Doctor 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-light border-0 datetimepicker-input"
-                                            placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-light border-0 datetimepicker-input"
-                                            placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Make An Appointment</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Appointment End -->
 
-
-    <!-- Pricing Plan Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Medical Packages</h5>
-                <h1 class="display-4">Awesome Medical Programs</h1>
-            </div>
-            <div class="owl-carousel price-carousel position-relative" style="padding: 0 45px 45px 45px;">
-                <div class="bg-light rounded text-center">
-                    <div class="position-relative">
-                        <img class="img-fluid rounded-top" src="img/price-1.jpg" alt="">
-                        <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
-                            <h3 class="text-white">Pregnancy Care</h3>
-                            <h1 class="display-4 text-white mb-0">
-                                <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>49<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="text-center py-5">
-                        <p>Emergency Medical Treatment</p>
-                        <p>Highly Experienced Doctors</p>
-                        <p>Highest Success Rate</p>
-                        <p>Telephone Service</p>
-                        <a href="" class="btn btn-primary rounded-pill py-3 px-5 my-2">Apply Now</a>
-                    </div>
-                </div>
-                <div class="bg-light rounded text-center">
-                    <div class="position-relative">
-                        <img class="img-fluid rounded-top" src="img/price-2.jpg" alt="">
-                        <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
-                            <h3 class="text-white">Health Checkup</h3>
-                            <h1 class="display-4 text-white mb-0">
-                                <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>99<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="text-center py-5">
-                        <p>Emergency Medical Treatment</p>
-                        <p>Highly Experienced Doctors</p>
-                        <p>Highest Success Rate</p>
-                        <p>Telephone Service</p>
-                        <a href="" class="btn btn-primary rounded-pill py-3 px-5 my-2">Apply Now</a>
-                    </div>
-                </div>
-                <div class="bg-light rounded text-center">
-                    <div class="position-relative">
-                        <img class="img-fluid rounded-top" src="img/price-3.jpg" alt="">
-                        <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
-                            <h3 class="text-white">Dental Care</h3>
-                            <h1 class="display-4 text-white mb-0">
-                                <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>149<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="text-center py-5">
-                        <p>Emergency Medical Treatment</p>
-                        <p>Highly Experienced Doctors</p>
-                        <p>Highest Success Rate</p>
-                        <p>Telephone Service</p>
-                        <a href="" class="btn btn-primary rounded-pill py-3 px-5 my-2">Apply Now</a>
-                    </div>
-                </div>
-                <div class="bg-light rounded text-center">
-                    <div class="position-relative">
-                        <img class="img-fluid rounded-top" src="img/price-4.jpg" alt="">
-                        <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
-                            <h3 class="text-white">Operation & Surgery</h3>
-                            <h1 class="display-4 text-white mb-0">
-                                <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>199<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="text-center py-5">
-                        <p>Emergency Medical Treatment</p>
-                        <p>Highly Experienced Doctors</p>
-                        <p>Highest Success Rate</p>
-                        <p>Telephone Service</p>
-                        <a href="" class="btn btn-primary rounded-pill py-3 px-5 my-2">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Pricing Plan End -->
-
-
-    <!-- Team Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Our Doctors</h5>
-                <h1 class="display-4">Qualified Healthcare Professionals</h1>
-            </div>
-            <div class="owl-carousel team-carousel position-relative">
-                <div class="team-item">
-                    <div class="row g-0 bg-light rounded overflow-hidden">
-                        <div class="col-12 col-sm-5 h-100">
-                            <img class="img-fluid h-100" src="img/team-1.jpg" style="object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                            <div class="mt-auto p-4">
-                                <h3>Doctor Name</h3>
-                                <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
-                            </div>
-                            <div class="d-flex mt-auto border-top p-4">
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-item">
-                    <div class="row g-0 bg-light rounded overflow-hidden">
-                        <div class="col-12 col-sm-5 h-100">
-                            <img class="img-fluid h-100" src="img/team-2.jpg" style="object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                            <div class="mt-auto p-4">
-                                <h3>Doctor Name</h3>
-                                <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
-                            </div>
-                            <div class="d-flex mt-auto border-top p-4">
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-item">
-                    <div class="row g-0 bg-light rounded overflow-hidden">
-                        <div class="col-12 col-sm-5 h-100">
-                            <img class="img-fluid h-100" src="img/team-3.jpg" style="object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                            <div class="mt-auto p-4">
-                                <h3>Doctor Name</h3>
-                                <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
-                            </div>
-                            <div class="d-flex mt-auto border-top p-4">
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
-
-
-    <!-- Search Start -->
-    <div class="container-fluid bg-primary my-5 py-5">
-        <div class="container py-5">
-            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Find A Doctor</h5>
-                <h1 class="display-4 mb-4">Find A Healthcare Professionals</h1>
-                <h5 class="text-white fw-normal">Duo ipsum erat stet dolor sea ut nonumy tempor. Tempor duo lorem eos sit sed ipsum takimata ipsum sit est. Ipsum ea voluptua ipsum sit justo</h5>
-            </div>
-            <div class="mx-auto" style="width: 100%; max-width: 600px;">
-                <div class="input-group">
-                    <select class="form-select border-primary w-25" style="height: 60px;">
-                        <option selected>Department</option>
-                        <option value="1">Department 1</option>
-                        <option value="2">Department 2</option>
-                        <option value="3">Department 3</option>
-                    </select>
-                    <input type="text" class="form-control border-primary w-50" placeholder="Keyword">
-                    <button class="btn btn-dark border-0 w-25">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Search End -->
-
+   
 
     <!-- Testimonial Start -->
     <div class="container-fluid py-5">
@@ -506,9 +237,9 @@
                                     <i class="fa fa-quote-left fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                            <p class="fs-4 fw-normal">"As a donor, I found the system incredibly intuitive and rewarding. The gamification feature was a pleasant surprise—I loved earning points for my contribution! It feels great to be recognized for making a difference, and the dietary suggestions provided after the donation helped me recover efficiently. Overall, this platform made donating blood an effortless and fulfilling experience.".</p>
                             <hr class="w-25 mx-auto">
-                            <h3>Patient Name</h3>
+                            <h3>Patient1</h3>
                             <h6 class="fw-normal text-primary mb-3">Profession</h6>
                         </div>
                         <div class="testimonial-item text-center">
@@ -518,9 +249,9 @@
                                     <i class="fa fa-quote-left fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                            <p class="fs-4 fw-normal">"This system is a game-changer for blood donors like me. The quick and seamless process, coupled with thoughtful health recommendations, ensures that I feel cared for even after the donation. The recognition through rewards makes me more enthusiastic about donating regularly. It’s not just a system; it’s a community that truly values generosity."</p>
                             <hr class="w-25 mx-auto">
-                            <h3>Patient Name</h3>
+                            <h3>Patient2</h3>
                             <h6 class="fw-normal text-primary mb-3">Profession</h6>
                         </div>
                         <div class="testimonial-item text-center">
@@ -530,9 +261,9 @@
                                     <i class="fa fa-quote-left fa-2x text-primary"></i>
                                 </div>
                             </div>
-                            <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                            <p class="fs-4 fw-normal">"I’m truly grateful for this platform! In a moment of urgency, the system connected me with a donor in record time, ensuring that the blood my loved one needed was delivered promptly. The additional health tips and support we received were so thoughtful and reassuring. This service is a lifesaver—literally!"</p>
                             <hr class="w-25 mx-auto">
-                            <h3>Patient Name</h3>
+                            <h3>Patient3</h3>
                             <h6 class="fw-normal text-primary mb-3">Profession</h6>
                         </div>
                     </div>
@@ -543,88 +274,15 @@
     <!-- Testimonial End -->
 
 
-    <!-- Blog Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Blog Post</h5>
-                <h1 class="display-4">Our Latest Medical Blog Posts</h1>
-            </div>
-            <div class="row g-5">
-                <div class="col-xl-4 col-lg-6">
-                    <div class="bg-light rounded overflow-hidden">
-                        <img class="img-fluid w-100" src="img/blog-1.jpg" alt="">
-                        <div class="p-4">
-                            <a class="h3 d-block mb-3" href="">Dolor clita vero elitr sea stet dolor justo  diam</a>
-                            <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
-                                rebum clita rebum dolor stet amet justo</p>
-                        </div>
-                        <div class="d-flex justify-content-between border-top p-4">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src="img/user.jpg" width="25" height="25" alt="">
-                                <small>John Doe</small>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <small class="ms-3"><i class="far fa-eye text-primary me-1"></i>12345</small>
-                                <small class="ms-3"><i class="far fa-comment text-primary me-1"></i>123</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="bg-light rounded overflow-hidden">
-                        <img class="img-fluid w-100" src="img/blog-2.jpg" alt="">
-                        <div class="p-4">
-                            <a class="h3 d-block mb-3" href="">Dolor clita vero elitr sea stet dolor justo  diam</a>
-                            <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
-                                rebum clita rebum dolor stet amet justo</p>
-                        </div>
-                        <div class="d-flex justify-content-between border-top p-4">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src="img/user.jpg" width="25" height="25" alt="">
-                                <small>John Doe</small>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <small class="ms-3"><i class="far fa-eye text-primary me-1"></i>12345</small>
-                                <small class="ms-3"><i class="far fa-comment text-primary me-1"></i>123</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="bg-light rounded overflow-hidden">
-                        <img class="img-fluid w-100" src="img/blog-3.jpg" alt="">
-                        <div class="p-4">
-                            <a class="h3 d-block mb-3" href="">Dolor clita vero elitr sea stet dolor justo  diam</a>
-                            <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna
-                                rebum clita rebum dolor stet amet justo</p>
-                        </div>
-                        <div class="d-flex justify-content-between border-top p-4">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src="img/user.jpg" width="25" height="25" alt="">
-                                <small>John Doe</small>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <small class="ms-3"><i class="far fa-eye text-primary me-1"></i>12345</small>
-                                <small class="ms-3"><i class="far fa-comment text-primary me-1"></i>123</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Blog End -->
-    
 
-    <!-- Footer Start -->
+    <!<!-- Footer Start -->
     <div class="container-fluid bg-dark text-light mt-5 py-5">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Get In Touch</h4>
-                    <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-4">For any kind of information required feel free to contact us. </p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>Vijayawada,AndhraPradesh</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>info@example.com</p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</p>
                 </div>
@@ -645,17 +303,14 @@
                         <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
                         <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
                         <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Latest Blog</a>
                         <a class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Newsletter</h4>
+                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">REGISTER</h4>
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control p-3 border-0" placeholder="Your Email Address">
-                            <button class="btn btn-primary">Sign Up</button>
+                            <a href="{{url_for('Register')}}" class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Sign Up</a>
                         </div>
                     </form>
                     <h6 class="text-primary text-uppercase mt-4 mb-3">Follow Us</h6>
@@ -673,10 +328,10 @@
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-primary" href="#">Your Site Name</a>. All Rights Reserved.</p>
+                    <p class="mb-md-0">&copy; <a class="text-primary" href="#">Blood_Donation_center</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">Designed by <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a></p>
+                    <p class="mb-0">Designed by <a class="text-primary" href="https://htmlcodex.com">Lokesh</a></p>
                 </div>
             </div>
         </div>
