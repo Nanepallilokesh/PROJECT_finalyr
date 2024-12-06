@@ -48,11 +48,17 @@ def Login():
             cursor.execute("SELECT * FROM registered_users WHERE username=%s AND password=%s", (username, password))
             user=cursor.fetchone()
             if user:
-                return render_template('donar_homepage.html')
+                return render_template("user_dashboard.html")
             else:
                 return redirect(url_for('Login'))
-    return render_template("login_donar.html")
+    return redirect(url_for('index'))
 
+
+@app.route('/Dashboard', methods=['GET', 'POST'])
+def Dashboard():
+    return render_template("user_dashboard.html")
+    
+    
 @app.route('/Register', methods=['GET', 'POST'])
 def Register():
     if request.method=='POST':

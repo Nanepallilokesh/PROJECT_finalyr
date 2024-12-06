@@ -102,3 +102,71 @@
     
 })(jQuery);
 
+
+
+function showModal() {
+    document.getElementById('loginModal').style.display = 'block';
+    showLogin(); // Show login form by default
+}
+
+function closeModal() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function showLogin() {
+    // Replace modal content with login form
+    const modalContent = document.getElementById('modal-content');
+    modalContent.innerHTML = `
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <form method="POST" action="/Login">
+            <!-- Username input box -->
+            <div class="input_box">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required />
+            </div>
+
+            <!-- User type input box -->
+            <label for="user_type">User Type:</label>
+            <select name="user_type" required>
+                <option value="donor">Donor</option>
+                <option value="hospital_admin">Hospital Admin</option>
+            </select><br>
+
+            <!-- Password input box -->
+            <div class="input_box">
+                <div class="password_title">
+                    <label for="password">Password</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
+
+            <!-- Login button -->
+            <button type="submit">Log In</button>
+
+            <!-- Sign Up Link -->
+            <p class="sign_up">Don't have an account? <a onclick="showRegister()">Sign Up</a></p>
+        </form>
+    `;
+}
+
+function showRegister() {
+    // Replace modal content with registration form
+    const modalContent = document.getElementById('modal-content');
+    modalContent.innerHTML = `
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Register</h2>
+        <form method="POST" action="/Register">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="text" name="phone_number" placeholder="Enter Phone Number" required>
+            <input type="text" name="city" placeholder="Enter City" required>
+            <input type="text" name="blood_group" placeholder="Enter Blood Group" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <input type="password" name="re_password" placeholder="Re-enter Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+    `;
+}

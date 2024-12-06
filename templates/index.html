@@ -78,13 +78,50 @@
                         <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
-                        <a href="{{ url_for('Login') }}" class="nav-item nav-link">Login</a>
+                        <a onclick="showModal()" class="nav-item nav-link">Login</a>
                     </div>
                 </div>
             </nav>
         </div>
     </div>
     <!-- Navbar End -->
+<!-- Modal for Login -->
+<div id="loginModal" class="modal">
+    <div id="modal-content" class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <form method="POST" action="/Login">
+            <!-- Username input box -->
+            <div class="input_box">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required />
+            </div>
+
+            <!-- User type input box -->
+            <label for="user_type">User Type:</label>
+            <select name="user_type" required>
+                <option value="donor">Donor</option>
+                <option value="hospital_admin">Hospital Admin</option>
+            </select><br>
+
+            <!-- Password input box -->
+            <div class="input_box">
+                <div class="password_title">
+                    <label for="password">Password</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
+
+            <!-- Login button -->
+            <button type="submit">Log In</button>
+
+            <!-- Sign Up Link -->
+            <p class="sign_up">Don't have an account? <a onclick="showRegister()">Sign Up</a></p>
+        </form>
+    </div>
+</div>
+<script src='/static/js/main.js'></script>
 
 
     <!-- Hero Start -->
@@ -96,7 +133,7 @@
                     <h1 class="display-1 text-red mb-md-4">"Give the gift of life—it costs nothing but means everything."
                     </h1>
                     <div class="pt-2">
-                        <a href="{{url_for('Register')}}" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Donate Now</a>
+                        <a onclick="showLogin()" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Donate Now</a>
                         <a href="{{url_for('Contact')}}" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
                     </div>
                 </div>
