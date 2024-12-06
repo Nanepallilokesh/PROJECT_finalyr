@@ -42,8 +42,13 @@ def Login():
         user_type=request.form.get('user_type')
         password=request.form.get('password')
         if user_type=='hospital_admin':
-            if username=='hospital1' and password=='hospital1':
-                return "hospital page opened"
+            cursor.execute("SELECT * FROM hospital_admin WHERE username=%s AND password=%s", (username, password))
+            user=cursor.fetchone()
+            if user:
+                session['logged_in'] = True
+                return render_template('/hospital/new_donation.html')
+            else:
+                return redirect(url_for('Login'))
         else:
             cursor.execute("SELECT * FROM registered_users WHERE username=%s AND password=%s", (username, password))
             user=cursor.fetchone()
