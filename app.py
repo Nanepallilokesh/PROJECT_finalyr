@@ -46,7 +46,7 @@ def Login():
             user=cursor.fetchone()
             if user:
                 session['logged_in'] = True
-                return render_template('/hospital/new_donation.html')
+                return render_template('/hospital/index.html')
             else:
                 return redirect(url_for('Login'))
         else:
@@ -95,6 +95,8 @@ def Logout():
 # Redirect to the home page
 
 
-
+@app.route('/new_seeker')
+def new_seeker():
+    return render_template('/hospital/new_seeker.html')
 if __name__ == "__main__":
     app.run(debug=True)

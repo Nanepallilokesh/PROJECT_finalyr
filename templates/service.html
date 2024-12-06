@@ -95,6 +95,43 @@
     </div>
 </div>
 <!-- Navbar End -->
+<!-- Modal for Login -->
+<div id="loginModal" class="modal">
+    <div id="modal-content" class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <form method="POST" action="/Login">
+            <!-- Username input box -->
+            <div class="input_box">
+                <input type="text" id="username" name="username" placeholder="Enter username" required />
+            </div>
+
+            <!-- User type input box -->
+            <label for="user_type">User Type:</label>
+            <select name="user_type" required>
+                <option value="donor">Donor</option>
+                <option value="hospital_admin">Hospital Admin</option>
+            </select><br>
+
+            <!-- Password input box -->
+            <div class="input_box">
+                <div class="password_title">
+                   
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
+
+            <!-- Login button -->
+            <button type="submit">Log In</button>
+
+            <!-- Sign Up Link -->
+            <p class="sign_up">Don't have an account? <a onclick="showRegister()">Sign Up</a></p>
+        </form>
+    </div>
+</div>
+<script src='/static/js/main.js'></script>
+
 
     <!-- Services Start -->
     <div class="container-fluid py-5">
