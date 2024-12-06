@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -66,7 +66,7 @@
     <div class="container-fluid sticky-top bg-white shadow-sm">
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-                <a href="{{url_for('Dashboard')}}" class="navbar-brand">
+                <a href="{{url_for('index')}}" class="navbar-brand">
                     <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -74,7 +74,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="{{url_for('Dashboard')}}"  class="nav-item nav-link active">Home</a>
+                        <a href="{{url_for('index')}}"  class="nav-item nav-link active">Home</a>
                         <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
@@ -85,193 +85,14 @@
     </div>
     <!-- Navbar End -->
 
+<script src='/static/js/main.js'></script>
 
 
     <!-- Hero Start -->
-    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
-        <div class="container py-5">
-            <div class="row justify-content-start">
-                <div class="col-lg-8 text-center text-lg-start">
-                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5" style="border-color: rgba(256, 256, 256, .3) !important;">Welcome To Blood Donation</h5>
-                    <h1 class="display-1 text-red mb-md-4">"Give the gift of life—it costs nothing but means everything."
-                    </h1>
-                    <div class="pt-2">
-                        <a href="{{url_for('Register')}}" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Donate Now</a>
-                        <a href="{{url_for('Contact')}}" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+     <h1>donars details/page</h1>
     <!-- Hero End -->
 
 
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row gx-5">
-                <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg" style="object-fit: cover;">
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="mb-4">
-                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
-                        <h1 class="display-4">"Best for successfull Blood Donation"</h1>
-                    </div>
-                    <pre>Welcome to the Blood Donation Management System, a platform dedicated to bridging the gap 
-between life-savers and those in need. Our mission is to create a streamlined, efficient,
-and transparent system for connecting blood donors and seekers, ensuring that every patient 
-in need receives timely help.
-<mark><h5>OUR VISION</h5></mark>
-We envision a world where no life is lost due to the unavailability of blood. By leveraging 
-technology and community support, we strive to make blood donation a simple and rewarding 
-experience for all.
-<mark><h5>OUR MISSION</h5></mark>
-<mark>Empower Donors:</mark> Provide an easy-to-use platform where donors can register, track
- their donations, and be recognized for their life-saving contributions.
-<mark>Support Seekers:</mark> Offer hospitals and patients a quick and reliable way to find 
-matching donors, reducing delays in critical situations.
-<mark>Promote Awareness:</mark> Educate the community about the importance of blood donation 
-and encourage active participation.
-                    </pre>
-                    <div class="row g-3 pt-3">
-                        <div class="col-sm-3 col-6">
-                            <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                <h6 class="mb-0">Healthy<small class="d-block text-primary">Donations</small></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-6">
-                            <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
-                                <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-6">
-                            <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
-                                <h6 class="mb-0">Gaminification<small class="d-block text-primary">rewards</small></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-6">
-                            <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                <h6 class="mb-0">Healthy<small class="d-block text-primary">dietary</small></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-
-    <!-- Services Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Services</h5>
-                <h1 class="display-4">Excellent Donation Services</h1>
-            </div>
-            <div class="row g-5">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon mb-4">
-                            <i class="fa fa-2x fa-user-md text-white"></i>
-                        </div>
-                        <h4 class="mb-3">Food Suggestion</h4>
-                        <p class="m-0">"After each successful donation, personalized dietary recommendations are provided to both donors and recipients, promoting optimal recovery and well-being."</p>
-                        <a class="btn btn-lg btn-primary rounded-pill" href="">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon mb-4">
-                            <i class="fa fa-2x fa-procedures text-white"></i>
-                        </div>
-                        <h4 class="mb-3">Emergency Care</h4>
-                        <p class="m-0">"Individuals in urgent need of blood during critical situations can receive timely transfusions with minimal delay, ensuring swift and efficient medical intervention."</p>
-                        <a class="btn btn-lg btn-primary rounded-pill" href="">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="service-icon mb-4">
-                            <i class="fa fa-2x fa-stethoscope text-white"></i>
-                        </div>
-                        <h4 class="mb-3">Gaminification</h4>
-                        <p class="m-0">
-                            "To foster engagement and recognize contributions, our gamification system rewards donors with redeemable points for every successful donation, transforming acts of generosity into a gratifying experience."</p>
-                        <a class="btn btn-lg btn-primary rounded-pill" href="">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-               
-
-    
-
-
-
-   
-
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Testimonial</h5>
-                <h1 class="display-4">Patients Say About Our Services</h1>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="owl-carousel testimonial-carousel">
-                        <div class="testimonial-item text-center">
-                            <div class="position-relative mb-5">
-                                <img class="img-fluid rounded-circle mx-auto" src="img/testimonial-1.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle" style="width: 60px; height: 60px;">
-                                    <i class="fa fa-quote-left fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <p class="fs-4 fw-normal">"As a donor, I found the system incredibly intuitive and rewarding. The gamification feature was a pleasant surprise—I loved earning points for my contribution! It feels great to be recognized for making a difference, and the dietary suggestions provided after the donation helped me recover efficiently. Overall, this platform made donating blood an effortless and fulfilling experience.".</p>
-                            <hr class="w-25 mx-auto">
-                            <h3>Patient1</h3>
-                            <h6 class="fw-normal text-primary mb-3">Profession</h6>
-                        </div>
-                        <div class="testimonial-item text-center">
-                            <div class="position-relative mb-5">
-                                <img class="img-fluid rounded-circle mx-auto" src="img/testimonial-2.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle" style="width: 60px; height: 60px;">
-                                    <i class="fa fa-quote-left fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <p class="fs-4 fw-normal">"This system is a game-changer for blood donors like me. The quick and seamless process, coupled with thoughtful health recommendations, ensures that I feel cared for even after the donation. The recognition through rewards makes me more enthusiastic about donating regularly. It’s not just a system; it’s a community that truly values generosity."</p>
-                            <hr class="w-25 mx-auto">
-                            <h3>Patient2</h3>
-                            <h6 class="fw-normal text-primary mb-3">Profession</h6>
-                        </div>
-                        <div class="testimonial-item text-center">
-                            <div class="position-relative mb-5">
-                                <img class="img-fluid rounded-circle mx-auto" src="img/testimonial-3.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle" style="width: 60px; height: 60px;">
-                                    <i class="fa fa-quote-left fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <p class="fs-4 fw-normal">"I’m truly grateful for this platform! In a moment of urgency, the system connected me with a donor in record time, ensuring that the blood my loved one needed was delivered promptly. The additional health tips and support we received were so thoughtful and reassuring. This service is a lifesaver—literally!"</p>
-                            <hr class="w-25 mx-auto">
-                            <h3>Patient3</h3>
-                            <h6 class="fw-normal text-primary mb-3">Profession</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
 
 
 
@@ -305,12 +126,8 @@ and encourage active participation.
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">REGISTER</h4>
-                    <form action="">
-                        <div class="input-group">
-                            <a href="{{url_for('Register')}}" class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Sign Up</a>
-                        </div>
-                    </form>
+
+                    
                     <h6 class="text-primary text-uppercase mt-4 mb-3">Follow Us</h6>
                     <div class="d-flex">
                         <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-twitter"></i></a>
@@ -329,7 +146,7 @@ and encourage active participation.
                     <p class="mb-md-0">&copy; <a class="text-primary" href="#">Blood_Donation_center</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">Designed by <a class="text-primary" href="https://htmlcodex.com">Lokesh</a></p>
+                    <p class="mb-0">Designed by <a class="text-primary" >Lokesh</a></p>
                 </div>
             </div>
         </div>

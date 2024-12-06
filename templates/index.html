@@ -62,29 +62,36 @@
     <!-- Topbar End -->
 
 
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top bg-white shadow-sm">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-                <a href="{{url_for('index')}}" class="navbar-brand">
-                    <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                        <a href="{{url_for('index')}}"  class="nav-item nav-link active">Home</a>
-                        <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
-                        <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
-                        <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="{{ url_for('index') }}" class="navbar-brand">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{{ url_for('index') }}" class="nav-item nav-link active">Home</a>
+                    <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
+                    <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
+                    <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
+
+                    {% if session.get('logged_in') != True %}
+                        <!-- Login Button only visible if the user is not logged in -->
                         <a onclick="showModal()" class="nav-item nav-link">Login</a>
-                    </div>
+                        {% else %}
+                        <!-- Logout Button when the user is logged in -->
+                        <a href="{{ url_for('Logout') }}" class="nav-item nav-link">Logout</a>
+                        {% endif %}
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </div>
-    <!-- Navbar End -->
+</div>
+<!-- Navbar End -->
 <!-- Modal for Login -->
 <div id="loginModal" class="modal">
     <div id="modal-content" class="modal-content">
@@ -93,7 +100,6 @@
         <form method="POST" action="/Login">
             <!-- Username input box -->
             <div class="input_box">
-                <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter username" required />
             </div>
 
@@ -107,7 +113,7 @@
             <!-- Password input box -->
             <div class="input_box">
                 <div class="password_title">
-                    <label for="password">Password</label>
+                   
                     <a href="#">Forgot Password?</a>
                 </div>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required />
@@ -133,7 +139,7 @@
                     <h1 class="display-1 text-red mb-md-4">"Give the gift of life—it costs nothing but means everything."
                     </h1>
                     <div class="pt-2">
-                        <a onclick="showLogin()" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Donate Now</a>
+                        <a  onclick="showModal()" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2"  id="loginModal">Donate Now</a>
                         <a href="{{url_for('Contact')}}" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
                     </div>
                 </div>

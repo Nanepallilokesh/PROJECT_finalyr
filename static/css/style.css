@@ -287,3 +287,81 @@
 .modal-content .close:hover {
     color: black;
 }
+
+/**new code**/
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.navbar-item {
+    margin: 0 10px;
+}
+
+.navbar-item a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar-item a:hover {
+    color: #f4a261;
+}
+
+/* User icon and dropdown */
+.user-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #f4a261;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-icon:hover .dropdown {
+    display: flex;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+}
+
+.dropdown-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-item a:hover {
+    color: #f4a261;
+}

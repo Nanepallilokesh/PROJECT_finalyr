@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,flash,redirect,url_for
+from flask import Flask,render_template,request,flash,redirect,url_for,session
 import mysql.connector
 from werkzeug.security import generate_password_hash
 app = Flask(__name__)
@@ -48,6 +48,7 @@ def Login():
             cursor.execute("SELECT * FROM registered_users WHERE username=%s AND password=%s", (username, password))
             user=cursor.fetchone()
             if user:
+                session['logged_in'] = True
                 return render_template("user_dashboard.html")
             else:
                 return redirect(url_for('Login'))
@@ -80,6 +81,15 @@ def Register():
             except mysql.connector.Error as err:
                 return f"Error: {err}",500
     return render_template("registration_donar.html")   
+
+
+@app.route('/Logout')
+def Logout():
+    session.pop('logged_in', None) 
+    return redirect(url_for('index'))
+# Redirect to the home page
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

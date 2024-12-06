@@ -62,11 +62,11 @@
     <!-- Topbar End -->
 
 
-   <!-- Navbar Start -->
-   <div class="container-fluid sticky-top bg-white shadow-sm">
+ <!-- Navbar Start -->
+ <div class="container-fluid sticky-top bg-white shadow-sm">
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-            <a href="{{url_for('index')}}" class="navbar-brand">
+            <a href="{{ url_for('index') }}" class="navbar-brand">
                 <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -74,11 +74,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="{{url_for('index')}}" class="nav-item nav-link ">Home</a>
+                    <a href="{{ url_for('index') }}" class="nav-item nav-link ">Home</a>
                     <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
                     <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
-                    <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
-                    <a href="{{ url_for('Login') }}" class="nav-item nav-link">Login</a>
+                    <a href="{{ url_for('Contact') }}" class="nav-item nav-link active">Contact</a>
+                    {% if session.get('logged_in') != True %}
+                    <!-- Login Button only visible if the user is not logged in -->
+                    <a onclick="showModal()" class="nav-item nav-link">Login</a>
+                    {% else %}
+                    <!-- Logout Button when the user is logged in -->
+                    <a href="{{ url_for('Logout') }}" class="nav-item nav-link">Logout</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
