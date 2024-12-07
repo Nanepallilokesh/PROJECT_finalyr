@@ -1,6 +1,7 @@
-from flask import Flask,render_template,request,flash,redirect,url_for,session
+from flask import Flask,render_template,request,flash,redirect,url_for,session,jsonify
 import mysql.connector
 from werkzeug.security import generate_password_hash
+from email_sender import send_email 
 app = Flask(__name__)
 
 
@@ -92,11 +93,42 @@ def Register():
 def Logout():
     session.pop('logged_in', None) 
     return redirect(url_for('index'))
-# Redirect to the home page
+
+
+#hospital routes
+@app.route('/Donar', methods=['GET', 'POST'])
+def Donar():
+    if request.method=='POST':
+        seekername=request.form.get('seekername')
+        city=request.form.get('city')
+        bloodgroup=request.form.get('bloodgroup')
+        cursor.execute("""select * from registered_users where city=%s and blood_group=%s """,(city,bloodgroup))
+        results = cursor.fetchall()
+        
+    return render_template('hospital/donar_list.html',seekername=seekername,donars=results)
 
 
 @app.route('/new_seeker')
 def new_seeker():
     return render_template('/hospital/new_seeker.html')
+
+
+@app.route('/coins_redemption')
+def coins_redemption():
+    return render_template('/hospital/coins_redemption.html')
+
+@app.route('/send-email', methods=['POST'])
+def send_email_route():
+    # Get the data from the request
+    data = request.get_json()
+    to_email = data.get('to_email')  # Get the recipient's email from the request
+    subject = data.get('subject')
+    body = data.get('body')
+
+    # Call the send_email function to send the email
+    send_email(to_email, subject, body)
+
+    return jsonify({"message": "Email sent successfully!"}), 200
+
 if __name__ == "__main__":
     app.run(debug=True)

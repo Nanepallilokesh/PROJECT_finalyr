@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Matching Donors for {{ seekername }}</h2>
+    {% if donars %}
+    <table>
+        <thead>
+            <tr>
+                <th>Donor Name</th>
+                <th>Blood Group</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>Invite</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in donars %}
+            
+            <tr>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[5] }}</td>
+                <td>{{ i[4] }}</td>
+                <td>{{ i[2] }}</td>
+                <td>
+                    <button onclick="sendEmail('{{ i[2] }}')">Send</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No matching donors found.</p>
+    {% endif %}
+    <script>
+        // Function to send email
+        function sendEmail(toEmail) {
+            const data = {
+                to_email: toEmail,
+                subject: 'Message from Seeker',
+                body: 'Hello! This is a message from a seeker. Please consider donating.'
+            };
+
+            // Send the email via AJAX (POST request)
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Email sent successfully to " + toEmail);
+            })
+            .catch(error => {
+                console.error("Error sending email:", error);
+                alert("Failed to send email.");
+            });
+        }
+    </script>
+</body>
+</html>

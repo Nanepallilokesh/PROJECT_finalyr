@@ -19,13 +19,7 @@
     });
 
 
-    // Date and time picker
-    $('.date').datetimepicker({
-        format: 'L'
-    });
-    $('.time').datetimepicker({
-        format: 'LT'
-    });
+    
     
     
     // Back to top button
@@ -42,53 +36,7 @@
     });
 
 
-    // Price carousel
-    $(".price-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1000,
-        margin: 45,
-        dots: false,
-        loop: true,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsive: {
-            0:{
-                items:1
-            },
-            992:{
-                items:2
-            },
-            1200:{
-                items:3
-            }
-        }
-    });
-
-
-    // Team carousel
-    $(".team-carousel, .related-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1000,
-        margin: 45,
-        dots: false,
-        loop: true,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsive: {
-            0:{
-                items:1
-            },
-            992:{
-                items:2
-            }
-        }
-    });
+   
 
 
     // Testimonials carousel
@@ -167,4 +115,31 @@ function showRegister() {
         </form>
         <p>Already have an account? <a onclick="showLogin()">Login</a></p>
     `;
+}
+function sendEmail() {
+    // Get the donor's email and other info
+    const donorEmail = document.getElementById("email").value;
+    const donorName = document.getElementById("donorName").value;
+    const subject = "Hello from the Blood Donation Platform";
+    const body = `Dear ${donorname},\n\nThis is a test email.\n\nBest regards,\nBlood Donation Team`;
+
+    // Send a POST request to the backend to send the email
+    fetch('/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            to_email: donorEmail,
+            subject: subject,
+            body: body
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Email sent!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
