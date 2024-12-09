@@ -94,14 +94,29 @@ def Logout():
     session.pop('logged_in', None) 
     return redirect(url_for('index'))
 
-
+@app.route('/Contact1',methods=['GET', 'POST'])
+def Contact1():
+    if request.method=='POST':
+        username=request.form.get('username')
+        email=request.form.get('email')
+        subject=request.form.get('subject')
+        message=request.form.get('message')
+        try:
+            cursor.execute("""insert into customer_contact(username,email,subject,message) values(%s,%s,%s,%s)""",(username,email,subject,message))
+            con.commit()
+            return jsonify({"message": " sent successfully!"}), 200
+        except mysql.connector.Error as err:
+                return f"Error: {err}",500
+    return redirect(url_for('Contact'))
+        
+        
 #hospital routes
 @app.route('/Donar', methods=['GET', 'POST'])
 def Donar():
     if request.method=='POST':
         seekername=request.form.get('seekername')
-        city=request.form.get('city')
-        bloodgroup=request.form.get('bloodgroup')
+        city=request.form.get('city').lower()
+        bloodgroup=request.form.get('bloodgroup').lower()
         cursor.execute("""select * from registered_users where city=%s and blood_group=%s """,(city,bloodgroup))
         results = cursor.fetchall()
         

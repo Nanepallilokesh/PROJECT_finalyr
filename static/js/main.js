@@ -92,7 +92,7 @@ function showLogin() {
             <button type="submit" style="background-color:skyblue;">Log In</button>
 
             <!-- Sign Up Link -->
-            <p class="sign_up">Don't have an account? <a onclick="showRegister()">Sign Up</a></p>
+            <p class="sign_up">Don't have an account? <a onclick="showRegister()" style="color:blue">Sign Up</a></p>
         </form>
     `;
 }
@@ -113,6 +113,6 @@ function showRegister() {
             <input type="password" name="re_password" placeholder="Re-enter Password" required>
             <button type="submit">Sign Up</button>
         </form>
-        <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+        <p>Already have an account? <a onclick="showLogin()" style="color:blue">Login</a></p>
     `;
 }
