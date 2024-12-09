@@ -116,30 +116,3 @@ function showRegister() {
         <p>Already have an account? <a onclick="showLogin()">Login</a></p>
     `;
 }
-function sendEmail() {
-    // Get the donor's email and other info
-    const donorEmail = document.getElementById("email").value;
-    const donorName = document.getElementById("donorName").value;
-    const subject = "Hello from the Blood Donation Platform";
-    const body = `Dear ${donorname},\n\nThis is a test email.\n\nBest regards,\nBlood Donation Team`;
-
-    // Send a POST request to the backend to send the email
-    fetch('/send-email', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            to_email: donorEmail,
-            subject: subject,
-            body: body
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('Email sent!');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}

@@ -49,15 +49,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for i in donars %}
             
+            {% for i in donars %}
+            <button id="send-all" onclick="sendAllEmails()">Send Emails to All Donors</button>
             <tr>
                 <td>{{ i[1] }}</td>
                 <td>{{ i[5] }}</td>
                 <td>{{ i[4] }}</td>
                 <td>{{ i[2] }}</td>
                 <td>
-                    <button onclick="sendEmail('{{ i[2] }}')">Send</button>
+                    <button onclick="sendEmail('{{ i[2] }}', '{{ i[1] }}')">Send</button>
                 </td>
             </tr>
             {% endfor %}
@@ -68,11 +69,25 @@
     {% endif %}
     <script>
         // Function to send email
-        function sendEmail(toEmail) {
+        function sendEmail(toEmail,donarname) {
             const data = {
                 to_email: toEmail,
-                subject: 'Message from Seeker',
-                body: 'Hello! This is a message from a seeker. Please consider donating.'
+                subject: 'Message from BLOOD DONATION',
+                // body: 'Hello! This is LOKESH. Please consider donating for {{seekername}} .'
+                body:`
+                Dear ${donarname},
+
+                A new seeker requires your blood donation assistance. Below are the details:
+
+                Seeker Name: {{seekername}}
+                Seeker Blood Group: {{bloodgroup}}
+                Seeker City: {{city}}
+
+                Your timely help can save a life. Please consider donating.
+
+                Best Regards,
+                Blood Donation System
+`
             };
 
             // Send the email via AJAX (POST request)

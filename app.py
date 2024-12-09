@@ -83,7 +83,7 @@ def Register():
             try:
                 cursor.execute("""Insert into registered_users(username,email,phone_number,city,blood_group,password) values(%s,%s,%s,%s,%s,%s)""",(username,email,phone_number,city,blood_group,password))
                 con.commit()
-                return render_template('donar_homepage.html ')
+                return render_template('user_dashboard.html ')
             except mysql.connector.Error as err:
                 return f"Error: {err}",500
     return render_template("registration_donar.html")   
@@ -105,7 +105,7 @@ def Donar():
         cursor.execute("""select * from registered_users where city=%s and blood_group=%s """,(city,bloodgroup))
         results = cursor.fetchall()
         
-    return render_template('hospital/donar_list.html',seekername=seekername,donars=results)
+    return render_template('hospital/donar_list.html',seekername=seekername,city=city,bloodgroup=bloodgroup,donars=results)
 
 
 @app.route('/new_seeker')
