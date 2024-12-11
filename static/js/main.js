@@ -88,6 +88,7 @@ function showLogin() {
                 <input type="password" id="password" name="password" placeholder="Enter your password" required />
             </div>
 
+           
             <!-- Login button -->
             <button type="submit" style="background-color:skyblue;">Log In</button>
 
@@ -111,7 +112,7 @@ function showRegister() {
             <input type="text" name="blood_group" placeholder="Enter Blood Group" required>
             <input type="password" name="password" placeholder="Enter Password" required>
             <input type="password" name="re_password" placeholder="Re-enter Password" required>
-            <button type="submit">Sign Up</button>
+            <button type="submit" style="background-color:skyblue;">Register Now</button>
         </form>
         <p>Already have an account? <a onclick="showLogin()" style="color:blue">Login</a></p>
     `;

@@ -22,6 +22,7 @@ cursor=con.cursor()
 
 @app.route('/')
 def index():
+    session['logged_in'] = False
     return render_template("index.html")
 
 @app.route('/About')
@@ -38,6 +39,7 @@ def Contact():
 
 @app.route('/Login', methods=['GET','POST'])
 def Login():
+    error = None
     if request.method=='POST':
         username=request.form.get('username').strip()
         user_type=request.form.get('user_type')
@@ -49,7 +51,7 @@ def Login():
                 session['logged_in'] = True
                 return render_template('/hospital/index.html')
             else:
-                return redirect(url_for('Login'))
+                 error = "Invalid username or password for hospital login"
         else:
             cursor.execute("SELECT * FROM registered_users WHERE username=%s AND password=%s", (username, password))
             user=cursor.fetchone()
@@ -57,15 +59,10 @@ def Login():
                 session['logged_in'] = True
                 return render_template("user_dashboard.html")
             else:
-                return redirect(url_for('Login'))
-    return redirect(url_for('index'))
+                error = "Invalid username or password for donar login"
+    return error
 
-
-@app.route('/Dashboard', methods=['GET', 'POST'])
-def Dashboard():
-    return render_template("user_dashboard.html")
-    
-    
+      
 @app.route('/Register', methods=['GET', 'POST'])
 def Register():
     if request.method=='POST':
@@ -77,10 +74,10 @@ def Register():
         password=request.form.get('password').strip()
         re_password=request.form.get('re_password').strip()
         if password!=re_password:
-            print("hello")
             return "passwords not matched!!"
         else:
             try:
+                session['logged_in'] = True
                 cursor.execute("""Insert into registered_users(username,email,phone_number,city,blood_group,password) values(%s,%s,%s,%s,%s,%s)""",(username,email,phone_number,city,blood_group,password))
                 con.commit()
                 return render_template('user_dashboard.html ')
@@ -88,7 +85,13 @@ def Register():
                 return f"Error: {err}",500
     return render_template("registration_donar.html")   
 
+@app.route('/Dashboard', methods=['GET', 'POST'])
+def Dashboard():
+    return render_template("user_dashboard.html")
 
+@app.route('/History')
+def History():
+    return render_template("history.html")
 @app.route('/Logout')
 def Logout():
     session.pop('logged_in', None) 
@@ -145,5 +148,33 @@ def send_email_route():
 
     return jsonify({"message": "Email sent successfully!"}), 200
 
+@app.route('/response')
+def response():
+    donor_id = int(request.args.get('donor_id')) 
+    response = request.args.get('response')
+   
+    
+    # Check if the request is already accepted
+    cursor.execute("SELECT accepted_by FROM registered_users WHERE id = %s", (donor_id,))
+    result = cursor.fetchone()
+    
+    if result and result['accepted_by'] is not None:
+        # Notify the donor that the request is already accepted
+        return f"<h1>Another donor has already accepted this request. Thank you for your willingness to help!</h1>"
+    
+    if response == 'accept':
+        # Mark the request as accepted by the current donor
+        cursor.execute("UPDATE registered_users SET response = 'accepted' WHERE id = %s", (donor_id,))
+        con.commit()
+        return f"<h1>Thank you for accepting the request! The seeker has been notified.</h1>"
+    elif response == 'decline':
+        # Optionally, log that the donor declined (if needed)
+        return f"<h1>Thank you for your response. We hope you can help in the future!</h1>"
+    else:
+        return f"<h1>Invalid response.</h1>"
+
+@app.route('/Continue')
+def Continue():
+    return render_template("Continue.html")
 if __name__ == "__main__":
     app.run(debug=True)

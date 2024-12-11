@@ -77,18 +77,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="{{ url_for('index') }}" class="nav-item nav-link ">Home</a>
-                    <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
-                    <a href="{{ url_for('Service') }}" class="nav-item nav-link active">Service</a>
-                    <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
-
                     {% if session.get('logged_in') != True %}
-                        <!-- Login Button only visible if the user is not logged in -->
-                        <a onclick="showModal()" class="nav-item nav-link">Login</a>
-                        {% else %}
-                        <!-- Logout Button when the user is logged in -->
-                        <a href="{{ url_for('Logout') }}" class="nav-item nav-link">Logout</a>
-                        {% endif %}
+                    <a href="{{url_for('index')}}"  class="nav-item nav-link active">Home</a>
+                    <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
+                    <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
+                    <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
+                    <!-- Login Button only visible if the user is not logged in -->
+                    <a onclick="showModal()" class="nav-item nav-link">Login</a>
+                    {% else %}
+                    <!-- Logout Button when the user is logged in -->
+                    <a href="{{url_for('Dashboard')}}"  class="nav-item nav-link active">Home</a>
+                    <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
+                    <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
+                    <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
+                    <a href="{{ url_for('Logout') }}" class="nav-item nav-link">Logout</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width=20px viewBox="0 0 448 512" style="margin-left: 40px; margin-right:-100px;">
+                        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+                    </svg>
+                    {% endif %}
                 </div>
             </div>
         </nav>

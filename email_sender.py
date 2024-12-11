@@ -3,8 +3,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 def send_email(to_email, subject, body):
-    sender_email = "lokeshnanepalli9@gmail.com"  # Replace with your Gmail address
-    sender_password = "vwnamxtgixtrinrq" # Replace with your Gmail password (use App Passwords if 2FA is enabled)
+    sender_email = "lokeshnanepalli9@gmail.com"  
+    sender_password = "vwnamxtgixtrinrq"
 
     # Set up the MIME
     msg = MIMEMultipart()
@@ -14,7 +14,7 @@ def send_email(to_email, subject, body):
 
 
     # Attach the body with the msg instance
-    msg.attach(MIMEText(body, 'plain'))
+    msg.attach(MIMEText(body, 'html'))
 
     try:
         # Establish connection to Gmail's SMTP server

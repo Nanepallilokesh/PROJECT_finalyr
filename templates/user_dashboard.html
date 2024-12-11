@@ -74,16 +74,51 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
+                       
+                        {% if session.get('logged_in') != True %}
                         <a href="{{url_for('index')}}"  class="nav-item nav-link active">Home</a>
                         <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
+                        <!-- Login Button only visible if the user is not logged in -->
+                        <a onclick="showModal()" class="nav-item nav-link">Login</a>
+                        {% else %}
+                        <!-- Logout Button when the user is logged in -->
+                        <a href="{{url_for('Dashboard')}}"  class="nav-item nav-link active">Home</a>
+                        <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
+                        <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
+                        <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url_for('Logout') }}" class="nav-item nav-link">Logout</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width=20px viewBox="0 0 448 512" style="margin-left: 40px; margin-right:-100px;">
+                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+                        </svg>
+                        {% endif %}
+                        
+                        
                     </div>
                 </div>
             </nav>
         </div>
     </div>
     <!-- Navbar End -->
+
+        <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5" style="border-color: rgba(256, 256, 256, .3) !important;">Welcome To Blood Donation</h5>
+                    <h1 class="display-1 text-red mb-md-4">"Give the gift of life—it costs nothing but means everything."
+                    </h1>
+                    <div class="pt-2">
+                        <a  href="{{url_for('History')}}" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2"  id="loginModal">History</a>
+                        <a href="{{url_for('Contact')}}" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
 
 <script src='/static/js/main.js'></script>
 
