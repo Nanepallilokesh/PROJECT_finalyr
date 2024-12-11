@@ -114,6 +114,7 @@ def Contact1():
         
         
 #hospital routes
+
 @app.route('/Donar', methods=['GET', 'POST'])
 def Donar():
     if request.method=='POST':
@@ -147,31 +148,6 @@ def send_email_route():
     send_email(to_email, subject, body)
 
     return jsonify({"message": "Email sent successfully!"}), 200
-
-@app.route('/response')
-def response():
-    donor_id = int(request.args.get('donor_id')) 
-    response = request.args.get('response')
-   
-    
-    # Check if the request is already accepted
-    cursor.execute("SELECT accepted_by FROM registered_users WHERE id = %s", (donor_id,))
-    result = cursor.fetchone()
-    
-    if result and result['accepted_by'] is not None:
-        # Notify the donor that the request is already accepted
-        return f"<h1>Another donor has already accepted this request. Thank you for your willingness to help!</h1>"
-    
-    if response == 'accept':
-        # Mark the request as accepted by the current donor
-        cursor.execute("UPDATE registered_users SET response = 'accepted' WHERE id = %s", (donor_id,))
-        con.commit()
-        return f"<h1>Thank you for accepting the request! The seeker has been notified.</h1>"
-    elif response == 'decline':
-        # Optionally, log that the donor declined (if needed)
-        return f"<h1>Thank you for your response. We hope you can help in the future!</h1>"
-    else:
-        return f"<h1>Invalid response.</h1>"
 
 @app.route('/Continue')
 def Continue():

@@ -78,9 +78,9 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     {% if session.get('logged_in') != True %}
-                    <a href="{{url_for('index')}}"  class="nav-item nav-link active">Home</a>
+                    <a href="{{url_for('index')}}"  class="nav-item nav-link ">Home</a>
                     <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
-                    <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
+                    <a href="{{ url_for('Service') }}" class="nav-item nav-link active">Service</a>
                     <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
                     <!-- Login Button only visible if the user is not logged in -->
                     <a onclick="showModal()" class="nav-item nav-link">Login</a>

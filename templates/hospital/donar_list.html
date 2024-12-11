@@ -63,11 +63,8 @@
             {% endfor %}
         </tbody>
     </table>
-    {% else %}
-    <p>No matching donors found.</p>
-    {% endif %}
     <script>
-        // Function to send email
+        // Function to send email individually
         function sendEmail(toEmail,donarname,donor_id) {
             const data = {
                 to_email: toEmail,
@@ -108,64 +105,14 @@
                 alert("Failed to send email.");
             });
         }
-        function sendAllEmails(donars) {
-            window.alert(donars)
-            for(let i=0;i<donars.length;i++){
-                window.alert(donars)
-                const data = {
-                to_email: i[2],
-                subject: 'Message from BLOOD DONATION',
-                // body: 'Hello! This is LOKESH. Please consider donating for {{seekername}} .'
-                body:`
-                Dear ${i[1]},
-
-                A new seeker requires your blood donation assistance. Below are the details:
-
-                Seeker Name: {{seekername}}
-                Seeker Blood Group: {{bloodgroup}}
-                Seeker City: {{city}}
-
-                Your timely help can save a life. Please consider donating.
-              
-
-
-
-                Best Regards,
-                Blood Donation System
-`
-            };
-
-            // Send the email via AJAX (POST request)
-            fetch('/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Email sent successfully to " + toEmail);
-            })
-            .catch(error => {
-                console.error("Error sending email:", error);
-                alert("Failed to send email.");
-            });
-
-            }
-            
-           
-        }
     </script>
-<button onclick='sendAllEmails({{ donars|tojson|safe }})' style="background-color: #007bff; color:white;">Send Emails to All Donors</button>
-
 <!-- Modal to Display Successful Emails -->
 <div id="successModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
     <div style="background:white; margin:10% auto; padding:20px; border-radius:10px; width:50%; text-align:center;">
         <h3>Emails Sent Successfully!</h3>
         <p>Recipients:</p>
         <ul id="recipientList" style="list-style-type: none; padding: 0;"></ul>
-        <button onclick="closeModal()" style="padding:10px 20px; background-color: #007bff; color:white; border:none; border-radius:5px;">Close</button>
+        <button onclick="closeModal1()" style="padding:10px 20px; background-color: #007bff; color:white; border:none; border-radius:5px;">Close</button>
     </div>
 </div>
 
@@ -226,6 +173,53 @@
             });
         });
     }
+    function sendReverseEmails(donars) {
+        // Check if donor records exist
+        console.log(donars)
+        if (!donars || !Array.isArray(donars) || donars.length === 0) {
+            alert("No donor records to send emails.");
+            return;
+        }
+        // Iterate through each donor record
+        donars.forEach((donor, index) => {
+            const email = document.getElementById("donorEmail").value;
+            if (donor[2]!=email){
+            const data = {
+                to_email: donor[2], // Donor email
+                subject: 'Message from BLOOD DONATION',
+                body: `
+                Dear ${donor[1]},
+
+                Thank you for your patience and readiness for doantion.
+
+                An another DONAR has arrived for donation.
+                Your timely help can save a life. Please consider donating furthur.
+
+                Best Regards,
+                Blood Donation System
+                `,
+            };
+
+            // Send the email via AJAX (POST request)
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then(() => {
+               console.log("sent")
+            })
+            .catch((error) => {
+                console.error("Error sending email to " + donor[2], error);
+            })
+            
+        }
+        });
+        alert("emails send successfull")
+    }
 
     // Function to show the success modal with recipient list
     function showSuccessModal(successful) {
@@ -244,11 +238,61 @@
     }
 
     // Function to close the modal
-    function closeModal() {
+    function closeModal1() {
         const modal = document.getElementById("successModal");
         modal.style.display = "none";
     }
 </script>
-<a href="{{url_for('Continue')}}" style="padding:10px 20px; margin-left:90%; background-color: #007bff; color:white; border:none; border-radius:5px;">Continue</a>
+<div style="display: flex; justify-content: space-between; width: 60%; margin: 20px auto;">
+    <button   onclick='sendAllEmails({{ donars|tojson|safe }})' style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
+        Send Emails For All
+    </button>
+    <button
+       style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px; text-align: center; display: inline-block;" 
+       onclick="openUpdateModal()">
+       Update
+</button>
+    <a href="{{url_for('Continue')}}" 
+       style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; border-radius: 5px; text-align: center; display: inline-block;">
+       Continue
+    </a>
+</div>
+<!-- Update Modal -->
+<div id="updateModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+    <h2>Update Donors</h2>
+    <label for="donorEmail">Enter Donor Email:</label>
+    <input type="email" id="donorEmail" placeholder="Enter arrived donor email" style="padding: 10px; width: 100%; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    <br>
+    <button onclick='sendReverseEmails({{ donars|tojson|safe }})' style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Update</button>
+    <button onclick="closeModal()" style="padding: 10px 20px; background-color: #ccc; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Cancel</button>
+</div>
+
+<script>
+    // Function to open the update modal
+    function openUpdateModal() {
+        const modal = document.getElementById("updateModal");
+        modal.style.display = "block";  // Show the modal
+    }
+
+    // Function to close the update modal
+    function closeModal() {
+        const modal = document.getElementById("updateModal");
+        modal.style.display = "none";  // Hide the modal
+    }
+
+    // Function to update donors based on the provided email
+    function updateDonors() {
+        const email = document.getElementById("donorEmail").value;
+        
+        if (!email) {
+            alert("Please enter arrived donor email.");
+            return;
+        }
+    }
+    
+</script>
+{% else %}
+    <p>No matching donors found.</p>
+    {% endif %}
 </body>
 </html>
