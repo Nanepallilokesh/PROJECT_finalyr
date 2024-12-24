@@ -1,7 +1,8 @@
 from flask import Flask,render_template,request,flash,redirect,url_for,session,jsonify
 import mysql.connector
 from werkzeug.security import generate_password_hash
-from email_sender import send_email 
+from email_sender import send_email
+from datafilter import match
 app = Flask(__name__)
 
 
@@ -117,15 +118,27 @@ def Contact1():
 
 @app.route('/Donar', methods=['GET', 'POST'])
 def Donar():
-    if request.method=='POST':
-        seekername=request.form.get('seekername')
-        city=request.form.get('city').lower()
-        bloodgroup=request.form.get('bloodgroup').lower()
-        cursor.execute("""select * from registered_users where city=%s and blood_group=%s """,(city,bloodgroup))
-        results = cursor.fetchall()
+    # if request.method=='POST':
+    #     seekername=request.form.get('seekername')
+    #     city=request.form.get('city').lower()
+    #     bloodgroup=request.form.get('bloodgroup').lower()
+    #     cursor.execute("""select * from registered_users where city=%s and blood_group=%s """,(city,bloodgroup))
+    #     results = cursor.fetchall()
+    result=match()
+    print("app.py")
+    print(result)
+    username=[i for i in result['username']]
+    bloodgroup=[i for i in result['blood_group']]
+    city=[i for i in result['city']]
+    email=[i for i in result['email']]
+    print(username)
+    print(bloodgroup)
+    print(city)
+    print(email)
+    
         
-    return render_template('hospital/donar_list.html',seekername=seekername,city=city,bloodgroup=bloodgroup,donars=results)
-
+    #return render_template('hospital/donar_list.html',seekername=seekername,city=city,bloodgroup=bloodgroup,donars=results)
+    return render_template('hospital/donar_list.html',u=username,b=bloodgroup,c=city,e=email)
 
 @app.route('/new_seeker')
 def new_seeker():
