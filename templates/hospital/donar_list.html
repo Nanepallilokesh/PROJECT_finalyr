@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donor Results</title>
+    <script src="/static/js/donarList.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,41 +36,48 @@
         }
     </style>
 </head>
-<body>
+<body onload="donarList_onload();">
+    <form action="" method="POST">   
+        <input type="hidden" name="userNameList" value="{{userName}}" />
+        <input type="hidden" name="bloodGroupList" value="{{bloodGroup}}" />
+        <input type="hidden" name="cityList" value="{{city}}" />
+        <input type="hidden" name="emailList" value="{{email}}" />
+        <input type="hidden" name="seekerName" value="{{seekerName}}" />
 
-    <h2>Matching Donors</h2>
-    {% if u and b and c and e %}
-    <table>
-        <thead>
-            <tr>
-                <th>Donor Name</th>
-                <th>Blood Group</th>
-                <th>City</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in range(u|length) %}
-            <tr>
-                <td>{{ u[i] }}</td>
-                <td>{{ b[i] }}</td>
-                <td>{{ c[i] }}</td>
-                <td>{{ e[i] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+        <h2>Matching Donors</h2>
+        {% if userName and bloodGroup and city and email %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Donor Name</th>
+                    <th>Blood Group</th>
+                    <th>City</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(userName|length) %}
+                <tr>
+                    <td>{{ userName[i] }}</td>
+                    <td>{{ bloodGroup[i] }}</td>
+                    <td>{{ city[i] }}</td>
+                    <td>{{ email[i] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
 
-{% else %}
-    <p>No matching donors found.</p>
-    {% endif %}
+        {% else %}
+        <p>No matching donors found.</p>
+        {% endif %}
 
-    <div style="display: flex; justify-content: space-between; width: 60%; margin: 20px auto;">
-        <button   onclick='sendAllEmails({{ e|tojson|safe }})' style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
-            Send Emails For All
-        </button>
-    </div>
+        <div style="display: flex; justify-content: space-between; width: 60%; margin: 20px auto;">
+            <button   onclick='javascript: return sendAllEmails(userNameList,bloodGroupList,cityList,emailList,seekerName)' style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
+                Send Emails For All
+            </button>
+        </div>
+</form>
 </body>
 
 </html>

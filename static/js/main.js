@@ -104,6 +104,7 @@ function showRegister() {
     modalContent.innerHTML = `
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Register</h2>
+        <div style="overflow-y: auto;">
         <form method="POST" action="/Register">
             <input type="text" name="username" placeholder="Enter Username" required>
             <input type="email" name="email" placeholder="Enter Email" required>
@@ -114,6 +115,7 @@ function showRegister() {
             <input type="password" name="re_password" placeholder="Re-enter Password" required>
             <button type="submit" style="background-color:skyblue;">Register Now</button>
         </form>
+        </div>
         <p>Already have an account? <a onclick="showLogin()" style="color:blue">Login</a></p>
     `;
 }

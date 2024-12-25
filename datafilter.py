@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 
 # Connect to SQLite (or replace this with your database connection)
 # conn = sqlite3.connect('your_database.db')  # Replace with your database path
-def match():
+def match(targetBloodGroup,targetCity):
     #database Configuration
     db_config={
         'host':'localhost',
@@ -28,14 +28,35 @@ def match():
     df = pd.read_sql_query(query, engine)
 
     # Close the connection
+    engine.dispose()
 
-    print(df)
+    #print(df)
+    df = df.dropna(subset=['blood_group'])
     label_encoder = LabelEncoder()
     df['blood_group_encoded'] = label_encoder.fit_transform(df['blood_group'])
 
-    print("1::",df['blood_group_encoded'].value_counts())
-    print("2::",df.head())
-    print("3::",df['blood_group_encoded'].unique())
+    #print(df)
+
+    target_blood_group = targetBloodGroup
+
+    print(f"Received targetBloodGroup: {targetBloodGroup}")
+     # Ensure the targetBloodGroup is valid
+    if targetBloodGroup is None:
+        raise ValueError("Blood group cannot be None.")
+    
+    if targetBloodGroup not in label_encoder.classes_:
+        raise ValueError(f"Blood group {targetBloodGroup} is invalid or not in the known labels.")
+
+    target_label = label_encoder.transform([targetBloodGroup])[0]
+
+    print("-->",label_encoder.transform([targetBloodGroup])[0])
+
+    print("target label-->",target_label)
+
+
+    # print("1::",df['blood_group_encoded'].value_counts())
+    # print("2::",df.head())
+    # print("3::",df['blood_group_encoded'].unique())
     # Features and target
     X = df[['username', 'city', 'email']]  # Features
     y = df['blood_group_encoded']  # Target
@@ -62,11 +83,11 @@ def match():
     y_pred = svm_model.predict(X_test)
 
     # Evaluate the model
-    print("Accuracy:", accuracy_score(y_test, y_pred))
+    #print("Accuracy:", accuracy_score(y_test, y_pred))
 
     # Filter for a specific blood group (e.g., 'O+')
-    target_blood_group = 'A+'
-    target_label = label_encoder.transform([target_blood_group])[0]
+   
+    #target_label = label_encoder.transform([target_blood_group])[0]
 
     # To filter, you need to predict for the original dataset
     X_full_transformed = column_transformer.transform(X)
@@ -74,9 +95,7 @@ def match():
     filtered_data = df[full_predictions == target_label]
 
     # Output filtered data
-    print(f"Filtered data for blood group {target_blood_group}:")
-    print(filtered_data)
+    #print(f"Filtered data for blood group {target_blood_group}:")
+    #print(filtered_data)
 
-        
-    engine.dispose()
     return filtered_data
