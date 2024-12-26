@@ -22,121 +22,102 @@
         <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/style.css">
+
+        <script src='/static/js/main.js'></script>
+    <script src='/static/js/common.js'></script>
 </head>
-<body>
-     <!-- Topbar Start -->
-     <div class="container-fluid py-2 border-bottom d-none d-lg-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-decoration-none text-body pe-3" href=""><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
-                        <span class="text-body">|</span>
-                        <a class="text-decoration-none text-body px-3" href=""><i class="bi bi-envelope me-2"></i>info@example.com</a>
+<body onload="openHospitalHome('HospitalHome');">
+    <!-- Navbar Start -->
+    <div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a  onclick="openHospitalHome('HospitalHome');" class="nav-item nav-link">Home</a>
+                    <a  onclick="openHospitalHome('HospitalSeeker');" class="nav-item nav-link">Seeker</a>
+                    <a  onclick="openHospitalHome('Coins');" class="nav-item nav-link">Coins</a>
+                    <a  onclick="openHospitalHome('History');" class="nav-item nav-link">History</a>
+                    <a href="{{ url_for('index') }}" class="nav-item nav-link">Logout</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width=20px viewBox="0 0 448 512" style="margin-left: 40px; margin-right:-100px;">
+                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+                        </svg>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<iframe id="hospitalHomePage" src="" frameborder="0" width="100%" height="600px"></iframe>
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light mt-5 py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Get In Touch</h4>
+                    <p class="mb-4">For any kind of information required feel free to contact us. </p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>Vijayawada,AndhraPradesh</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>info@example.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Quick Links</h4>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
+                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
+                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
+                        <a class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
                     </div>
                 </div>
-                <div class="col-md-6 text-center text-lg-end">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a class="text-body ps-2" href="">
-                            <i class="fab fa-youtube"></i>
-                        </a>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Popular Links</h4>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
+                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
+                        <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
+                        <a class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">REGISTER</h4>
+                    <form action="">
+                        <div class="input-group">
+                            <a onclick="showModal()" class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Sign Up</a>
+                        </div>
+                    </form>
+                    <h6 class="text-primary text-uppercase mt-4 mb-3">Follow Us</h6>
+                    <div class="d-flex">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Topbar End -->
-    <!-- Navbar Start -->
-<div class="container-fluid sticky-top bg-white shadow-sm">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
-        </nav>
-    </div>
-</div>
-<div class="container1">
-        <!-- Seeker Form -->
-        <div class="form-box1">
-            <h2>Seeker Details</h2>
-            <form action="Donar" method="POST">
-                <label for="seekerName">Seeker Name:</label>
-                <input type="text" id="seekerName" name="seekername" placeholder="Enter seeker name" required>
-                
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" placeholder="Enter city" required>
-                
-                <label for="bloodGroup">Blood Group:</label>
-                <select name="bloodgroup" style="height:40px;width:250px;margin-bottom:20px;" requried>
-                        <option value="" disabled selected>Select Blood Group</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                <br>
-                
-                <input type="submit" value="Find Donors">
-            </form>
+    
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-primary" href="#">Blood_Donation_center</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Designed by <a class="text-primary">Lokesh</a></p>
+                </div>
+            </div>
         </div>
+    </div>
+    <!-- Footer End -->
 
-        <!-- Coins Redemption Form -->
-        <div class="form-box1">
-            <h2>Coins Redemption</h2>
-            <form action="/coin_redemption" method="post">
-                <label for="donorname">Donor Name:</label>
-                <input type="text" id="donorname" name="donorname" placeholder="Enter donor Name" required>
-                <label for="donorcity">Donor City:</label>
-                <input type="text" id="donorcity" name="donorcity" placeholder="Enter donor City" required>
-                <label for="donorid">Donor ID:</label>
-                <input type="text" id="donorid" name="donorid" placeholder="Enter donor ID" required>
-                <input type="submit" value="Redeem Coins">
-            </form>
-        </div>
-    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
 </body>
 </html>
-
-<div class="container2">
-    <!-- Donar History Form -->
-    <div class="form-box1">
-        <h2>Donar History</h2>
-        <form action="/find-matches" method="post">
-            <label for="donarname">Donar Name:</label>
-            <input type="text" id="donarname" name="donarname" placeholder="Enter Donar name" required>
-            
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" placeholder="Enter city" required>
-            
-            <label for="bloodGroup">Blood Group:</label>
-            <select name="bloodgroup" style="height:40px;width:250px;margin-bottom:20px;" requried>
-                <option value="" disabled selected>Select Blood Group</option>
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-            </select>
-            
-            <input type="submit" value="See History">
-        </form>
-    </div>
-    

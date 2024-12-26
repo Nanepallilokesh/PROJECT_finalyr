@@ -26,6 +26,10 @@ def index():
     session['logged_in'] = False
     return render_template("index.html")
 
+@app.route('/Home')
+def Home():
+    return render_template("home.html")
+
 @app.route('/About')
 def About():
     return render_template("about.html")
@@ -38,12 +42,36 @@ def Service():
 def Contact():
     return render_template("contact.html")
 
+@app.route('/Loginpage')
+def Loginpage():
+    return render_template("/userLogin/login.html")
+
+@app.route('/HospitalHome')
+def HospitalHome():
+    return render_template("/hospital/home.html")
+
+@app.route('/HospitalSeeker')
+def HospitalSeeker():
+    return render_template("/hospital/HospitalSeeker.html")
+
+@app.route('/Coins')
+def Coins():
+    return render_template("coins.html")
+    
+@app.route('/History')
+def History():
+    return render_template("history.html")
+
+@app.route('/donarList')
+def donarList():
+    return render_template("history.html")
+
 @app.route('/Login', methods=['GET','POST'])
 def Login():
     error = None
     if request.method=='POST':
         username=request.form.get('username').strip()
-        user_type=request.form.get('user_type')
+        user_type=request.form.get('userType')
         password=request.form.get('password')
         if user_type=='hospital_admin':
             cursor.execute("SELECT * FROM hospital_admin WHERE username=%s AND password=%s", (username, password))
@@ -52,7 +80,8 @@ def Login():
                 session['logged_in'] = True
                 return render_template('/hospital/index.html')
             else:
-                 error = "Invalid username or password for hospital login"
+                return render_template('/userLogin/login.html',error="failed")
+                #error = "Invalid username or password for hospital login"
         else:
             cursor.execute("SELECT * FROM registered_users WHERE username=%s AND password=%s", (username, password))
             user=cursor.fetchone()
@@ -90,9 +119,6 @@ def Register():
 def Dashboard():
     return render_template("user_dashboard.html")
 
-@app.route('/History')
-def History():
-    return render_template("history.html")
 @app.route('/Logout')
 def Logout():
     session.pop('logged_in', None) 
@@ -122,24 +148,17 @@ def Donar():
     bloodGroup = request.form.get('bloodgroup')
 
     print(f"Received blood group: {bloodGroup}")
-    
+
     city = request.form.get('city')
 
     result=match(bloodGroup,city)
+    print(f"result-->",result)
     username=[i for i in result['username']]
     bloodgroup=[i for i in result['blood_group']]
     city=[i for i in result['city']]
     email=[i for i in result['email']]
     return render_template('hospital/donar_list.html',userName=username,bloodGroup=bloodgroup,city=city,email=email,seekerName=seekername)
 
-@app.route('/new_seeker')
-def new_seeker():
-    return render_template('/hospital/new_seeker.html')
-
-
-@app.route('/coins_redemption')
-def coins_redemption():
-    return render_template('/hospital/coins_redemption.html')
 
 @app.route('/send-email', methods=['POST'])
 def send_email_route():

@@ -63,11 +63,11 @@ function sendAllEmails(userNameList, bloodGroupList, cityList, emailList, seeker
             }
         });
     }
-    return true;
 }
 
 
 function donarList_onload(){
+    alert('hello donars');
     let cleaned = document.forms[0].userNameList.value.replace(/[\[\]',]/g, '');
     document.forms[0].userNameList.value = cleaned.replace(/\s+/g, '~');
 

@@ -1,0 +1,153 @@
+/* From Uiverse.io by krlozCJ */ 
+.container {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #7ac9eb;
+    color: rgb(0, 0, 0);
+    box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e;
+    margin-top: 80px;
+}
+  
+  .container .slider {
+    width: 200%;
+    position: relative;
+    transition: transform ease-out 0.3s;
+    display: flex;
+  }
+  
+  #register_toggle {
+    display: none;
+  }
+  
+  .container #register_toggle:checked + .slider {
+    transform: translateX(-50%);
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 1.5em 3em;
+    width: 50%;
+  }
+  
+  .title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2em;
+  }
+  
+  form .form_control {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  form .form_control .label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transition: transform ease 0.2s;
+    transform: translate(0%, -50%);
+    font-size: 15px;
+    user-select: none;
+    pointer-events: none;
+    color: #000000;
+  }
+  
+  form .form_control .input {
+    width: 95%;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #000000;
+    padding: 0.5rem;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: box-shadow ease 0.2s;
+    box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 1.5px 1.5px 3px #0e0e0e, inset -1.5px -1.5px 3px #5f5e5e;
+  }
+
+  /* Container styles for label and select */
+.form_select_control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 80%; /* Match width of input fields */
+}
+
+/* Label styles */
+.form_select_control .label {
+    font-size: 14px;
+    color: #333;
+    /*margin-right: 10px; */
+    margin-left: -20px;
+    flex-shrink: 0; /* Prevent the label from shrinking */
+}
+
+/* Dropdown styles (reuse shared styles from input fields) */
+.form_select_control .input {
+    width: 95%;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #000000;
+    padding: 0.5rem;
+    font-size: 15px;
+    border-radius: 5px;
+    transition: box-shadow ease 0.2s;
+    box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 1.5px 1.5px 3px #0e0e0e, inset -1.5px -1.5px 3px #5f5e5e;
+}
+.form_select_control .label {
+    font-size: 20px;
+}
+
+.form_select_control .input:focus {
+    outline: none;
+    border-inline: 2px solid #12B1D1;
+}
+
+  
+  form .form_control .input:focus,
+  form .form_control .input:valid {
+    box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 3px 3px 4px #0e0e0e, inset -3px -3px 4px #5f5e5e;
+  }
+  
+  form .form_control .input:focus + .label,
+  form .form_control .input:valid + .label {
+    transform: translate(-150%, -50%);
+  }
+  
+  form button {
+    width: 50%;
+    background-color: rgb(2, 204, 245);
+    border: none;
+    outline: none;
+    color: #000000;
+    padding: 0.5rem;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: box-shadow ease 0.1s;
+    box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e;
+  }
+  
+  form button:active {
+    box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 3px 3px 4px #0e0e0e, inset -3px -3px 4px #5f5e5e;
+  }
+  
+  .bottom_text {
+    font-size: 15px;
+  }
+  
+  .bottom_text .swtich {
+    font-weight: 700;
+    cursor: pointer;
+  }

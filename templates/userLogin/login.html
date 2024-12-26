@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- Source Codes By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGIN FORM</title>
+    
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <script src='/static/js/main.js'></script>
+    <script src='/static/js/common.js'></script>
+</head>
+<body onload="checkForError();">
+    <input type="hidden" name="errorMsg" value="{{error}}" />
+    <center>
+    <div class="container">
+    <input type="checkbox" id="register_toggle">
+    <div class="slider">
+        <form class="form" method="POST" action="/Login">
+        <span class="title">Login</span>
+        <div class="form_select_control">
+            <label for="userType" class="label" name="userType"><b>User Type:</b></label>
+            <select class="input" name="userType" id="userType">
+                <option value="" disabled selected>Select</option>
+                <option value="donor">Donor</option>
+                <option value="hospital_admin">Hospital Admin</option>
+            </select>
+        </div>
+        <div class="form_control">
+            <input type="text" class="input" name="username" required="">
+            <label class="label">User name</label>
+        </div>
+        <div class="form_control">
+            <input type="password" class="input" name="password" required="">
+            <label class="label">Password</label>
+        </div>
+        <button type="submit" onclick="validateLogin();"><b>Login</b></button>
+
+        <span class="bottom_text">Don't have an account? <label for="register_toggle" class="swtich">Sign Up</label> </span>
+        </form>
+        <form class="form">
+        <span class="title">Sign Up</span>
+        <div class="form_control">
+            <input type="text" class="input" required="">
+            <label class="label">Username</label>
+        </div>
+        <div class="form_control">
+            <input type="email" class="input" required="">
+            <label class="label">Email</label>
+        </div>
+        <div class="form_control">
+            <input type="password" class="input" required="">
+            <label class="label">Password</label>
+        </div>
+        <button>Sign Up</button>
+
+        <span class="bottom_text">Already have an account? <label for="register_toggle" class="swtich">Sign In</label> </span>
+        </form>
+
+        
+        </div>
+    </div>
+</center>
+</body>
+</html>

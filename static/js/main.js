@@ -68,18 +68,19 @@ function showLogin() {
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Login</h2>
         <form method="POST" action="/Login">
-            <!-- Username input box -->
-            <div class="input_box">
-                
-                <input type="text" id="username" name="username" placeholder="Enter username" required />
-            </div>
-
             <!-- User type input box -->
             <label for="user_type" style="color:black;">User Type:</label>
             <select name="user_type" required>
                 <option value="donor">Donor</option>
                 <option value="hospital_admin">Hospital Admin</option>
             </select><br>
+            <!-- Username input box -->
+            <div class="input_box">
+                
+                <input type="text" id="username" name="username" placeholder="Enter username" required />
+            </div>
+
+            
 
             <!-- Password input box -->
             <div class="input_box">

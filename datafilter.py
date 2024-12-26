@@ -49,9 +49,7 @@ def match(targetBloodGroup,targetCity):
 
     target_label = label_encoder.transform([targetBloodGroup])[0]
 
-    print("-->",label_encoder.transform([targetBloodGroup])[0])
-
-    print("target label-->",target_label)
+    
 
 
     # print("1::",df['blood_group_encoded'].value_counts())

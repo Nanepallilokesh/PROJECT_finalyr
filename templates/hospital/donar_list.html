@@ -37,7 +37,7 @@
     </style>
 </head>
 <body onload="donarList_onload();">
-    <form action="" method="POST">   
+    <form action="/donarList" method="POST">   
         <input type="hidden" name="userNameList" value="{{userName}}" />
         <input type="hidden" name="bloodGroupList" value="{{bloodGroup}}" />
         <input type="hidden" name="cityList" value="{{city}}" />
@@ -73,7 +73,7 @@
         {% endif %}
 
         <div style="display: flex; justify-content: space-between; width: 60%; margin: 20px auto;">
-            <button   onclick='javascript: return sendAllEmails(userNameList,bloodGroupList,cityList,emailList,seekerName)' style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
+            <button   type="submit" onclick='sendAllEmails(userNameList,bloodGroupList,cityList,emailList,seekerName)' style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
                 Send Emails For All
             </button>
         </div>
