@@ -24,3 +24,13 @@ function checkForError(){
         parent.document.getElementById('mainFooterDiv').style.display="block";
     }
 }
+
+function commonaValidation(){
+    if(document.getElementById('seekerName').value=='' || document.getElementById('city').value=='' || document.getElementById('bloodgroup').value==''){
+        alert('Please select the mandatory fields');
+        return false;
+    }
+    else{
+        return true;
+    }
+}

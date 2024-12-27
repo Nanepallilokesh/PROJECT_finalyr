@@ -52,7 +52,7 @@ def HospitalHome():
 
 @app.route('/HospitalSeeker')
 def HospitalSeeker():
-    return render_template("/hospital/HospitalSeeker.html")
+    return render_template("/hospital/seeker.html")
 
 @app.route('/Coins')
 def Coins():
@@ -144,20 +144,30 @@ def Contact1():
 
 @app.route('/Donar', methods=['GET', 'POST'])
 def Donar():
-    seekername=request.form.get('seekername')
-    bloodGroup = request.form.get('bloodgroup')
+    seekername = request.json.get('seekername')
+    tempBloodGroup = request.json.get('bloodgroup')
 
-    print(f"Received blood group: {bloodGroup}")
+    print(f"Received blood group: {tempBloodGroup}")
 
-    city = request.form.get('city')
+    city = request.json.get('city')
 
-    result=match(bloodGroup,city)
+    result=match(tempBloodGroup,city)
     print(f"result-->",result)
     username=[i for i in result['username']]
     bloodgroup=[i for i in result['blood_group']]
     city=[i for i in result['city']]
     email=[i for i in result['email']]
-    return render_template('hospital/donar_list.html',userName=username,bloodGroup=bloodgroup,city=city,email=email,seekerName=seekername)
+    data = {
+        "username": username,
+        "bloodgroup": bloodgroup,
+        "city": city,
+        "email":email
+    }
+
+    
+    #return render_template('hospital/donar_list.html',userName=username,bloodGroup=bloodgroup,city=city,email=email,seekerName=seekername)
+    #return username,bloodgroup,city,email,seekerName
+    return jsonify(data)
 
 
 @app.route('/send-email', methods=['POST'])

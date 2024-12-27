@@ -1,0 +1,215 @@
+.layoutMiniTable {
+    border-collapse: collapse;
+    padding-top: 8px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.layoutMiniTable td {
+    color: black;
+    font-size: 15px;
+    padding: 3px;
+}
+.layoutMiniTable td a {
+    color: rgb(0,112,96);
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.toptitle {
+	FONT-FAMILY: Verdana, Helvetica, sans-serif; 
+	FONT-SIZE: 11px;
+	Padding-top: 0px;
+	margin-top:0px;
+	FONT-weight: bold;
+	color: white;
+	BACKGROUND-COLOR: rgb(0,112,96);
+	width:100%;
+}
+.toptitle label{
+	color:white;
+}
+
+input.fieldinput_amount { 
+	border: 1px solid #787878;
+	width:125px;
+	height: 16px;
+	background: #fff;
+	font-size:11px;
+	font-family:Verdana;
+	text-align: right;
+} 
+
+input.fieldinput readOnly_amount { 
+	border: white solid 1px; 
+	width:125px; 
+	height: 16px; 
+	background: #fff; 
+	font-size:11px; 
+	font-family:Verdana;
+	text-align:right;
+}
+
+input.fieldinput readOnly { 
+	border: 1px solid transparent; 
+	width:125px; 
+	height: 16px; 
+	background: #fff; 
+	font-size:11px; 
+	font-family:Verdana;
+}
+
+input.fieldinput_mandatory{
+	border: 1px solid #787878;
+	width:125px;
+	height: 20px;
+	background: #D0D0D0;
+	font-size:11px;
+	font-family: Verdana;
+}
+select.fieldinput_mandatory{
+	border: 1px solid #787878;
+	width:125px;
+	height: 20px;
+	background: #D0D0D0;
+	font-size:11px;
+	font-family: Verdana;
+}
+
+input.fieldinput_mandatory_amount {
+
+	border: 1px solid #787878;
+	width:125px;
+	height: 16px;
+	background: #D0D0D0;
+	font-size:11px;
+	font-family: Verdana;
+	text-align: right;
+}
+
+
+
+select.fieldinput {
+	border: 1px solid #787878;
+	padding: 2px;
+	width:125px;
+	height: 20px;
+	background: #fff;
+	font-size:11px;
+	font-family: Verdana;
+}
+
+
+input.fieldinput {
+	border: 1px solid #787878;
+	width:125px;
+	height: 16px;
+	background: #fff;
+	font-size:11px;
+	font-family: Verdana;
+}
+
+select.fieldinput_readOnly {
+	border: 1px solid white;
+	padding: 2px;
+	width:125px;
+	height: 20px;
+	background: #fff;
+	font-size:11px;
+	font-family: Verdana;
+}
+select.fieldinput readOnly transparent {
+	border: 1px solid transparent;
+	padding: 2px;
+	width:125px;
+	height: 20px;
+	background: transparent;
+	font-size:11px;
+	font-family: Verdana;
+}
+
+
+
+select.fieldinput amount{
+	border: 1px solid #787878;
+	padding: 2px;
+	width:125px;
+	height: 20px;
+	background: #fff;
+	font-size:11px;
+	font-family: Verdana;
+	text-align: right;
+}
+
+select.fieldinput_readOnly_amount {
+	border: white solid 1px;
+	padding: 2px;
+	width:125px;
+	height: 20px;
+	background: #fff;
+	font-size:11px;
+	font-family: Verdana;
+	text-align: right;
+}
+
+fieldset {
+    margin-left: 8px;
+    margin-right: 8px;
+    border: 2px solid #04cff7;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-weight: bold;
+    color: #04cff7;
+}
+/* From Uiverse.io by arieshiphop */ 
+button {
+    margin-left: 15px;
+    font-size: 13px;
+    padding: 0.5em 2em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: #04cff7;
+    color: rgb(0, 0, 0);
+    border-radius: 4px;
+}
+
+button:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+button:active {
+    transform: translate(0em, 0.2em);
+}
+
+#donorDataTable {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#donorDataTable td, #donorDataTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#donorDataTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#donorDataTable tr:hover {background-color: #ddd;}
+
+#donorDataTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04cff7;
+    color: white;
+}

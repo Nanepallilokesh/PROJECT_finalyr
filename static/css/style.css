@@ -368,6 +368,7 @@
 
 /***seeker form and redemption form***/
 .container1 {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -377,6 +378,7 @@
 
 
 .form-box1 {
+    width: 100%;
     background-color: #fff;
     border: 1px solid #b4b1b1;
     border-radius: 8px;
