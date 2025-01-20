@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             background-color: #f8f9fa;
             padding: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -19,25 +21,31 @@
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        th, td {
+
+        th,
+        td {
             text-align: left;
             padding: 12px;
             border: 1px solid #ddd;
         }
+
         th {
             background-color: #007bff;
             color: white;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         h2 {
             text-align: center;
         }
     </style>
 </head>
+
 <body onload="donarList_onload();">
-    <form action="/donarList" method="POST">   
+    <form action="/donarList" method="POST">
         <input type="hidden" name="userNameList" value="{{userName}}" />
         <input type="hidden" name="bloodGroupList" value="{{bloodGroup}}" />
         <input type="hidden" name="cityList" value="{{city}}" />
@@ -66,18 +74,19 @@
                 {% endfor %}
             </tbody>
         </table>
-        
+
 
         {% else %}
         <p>No matching donors found.</p>
         {% endif %}
 
         <div style="display: flex; justify-content: space-between; width: 60%; margin: 20px auto;">
-            <button   type="submit" onclick='sendAllEmails(userNameList,bloodGroupList,cityList,emailList,seekerName)' style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
+            <button type="submit" onclick='sendAllEmails(userNameList,bloodGroupList,cityList,emailList,seekerName)'
+                style="flex: 1; margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: center; cursor: pointer;">
                 Send Emails For All
             </button>
         </div>
-</form>
+    </form>
 </body>
 
 </html>

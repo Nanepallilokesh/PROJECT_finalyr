@@ -167,8 +167,8 @@ legend {
     font-weight: bold;
     color: #04cff7;
 }
-/* From Uiverse.io by arieshiphop */ 
-button {
+
+ button {
     margin-left: 15px;
     font-size: 13px;
     padding: 0.5em 2em;
@@ -186,7 +186,7 @@ button:hover {
 
 button:active {
     transform: translate(0em, 0.2em);
-}
+} 
 
 #donorDataTable {
     margin-top: 10px;
@@ -213,3 +213,88 @@ button:active {
     background-color: #04cff7;
     color: white;
 }
+
+.btnEnable {
+    margin-left: 15px;
+    font-size: 13px;
+    padding: 0.5em 2em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: #04cff7;
+    color: rgb(0, 0, 0);
+    border-radius: 4px;
+}
+
+.btnEnable:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+.btnEnable:active {
+    transform: translate(0em, 0.2em);
+}
+
+.btnDisable {
+    background: #ffffff;
+    
+}
+
+/* .btnDisable:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+.btnDisable:active {
+    transform: translate(0em, 0.2em);
+} */
+
+button:disabled {
+	background-color: #ccc;
+	margin-left: 15px;
+	color: #666;
+	cursor: not-allowed;
+}
+
+
+
+#overlay-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it is on top of everything */
+    color: white;
+    font-size: 18px;
+    display: none; /* Initially hidden */
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px; /* Add spacing between spinner and text */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+p {
+    font-size: 18px;
+    text-align: center;
+}
+

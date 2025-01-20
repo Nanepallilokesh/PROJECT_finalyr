@@ -38,12 +38,16 @@
     <script src="/static/js/donarList.js"></script>
 </head>
 <body class="menubody" onload="">
+    <div id="overlay-loader" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+    <div id="main-content">
     <form action="" method="POST">
         <input type="hidden" name="userNameList"  />
         <input type="hidden" name="bloodGroupList"  />
         <input type="hidden" name="cityList" />
         <input type="hidden" name="emailList" />
-        <input type="hidden" name="seekerName" />
         <table class="layoutMiniTable">
             <tr>
                 <center>
@@ -54,32 +58,51 @@
         <fieldset>
             <table class="layoutMiniTable">
                 <tr>
-                    <td width="10%"><label for="seekerName"  class="lbltext">Seeker Name:</label></td>
-                    <td width="20%"><input type="text" id="seekerName" class="fieldinput_mandatory" name="seekername" placeholder="Enter seeker name" required></td>
-                    <td width="5%"><label for="city">City:</label></td>
-                    <td width="20%"><input type="text" id="city" class="fieldinput_mandatory" name="city" placeholder="Enter City" required></td>
-                    <td width="10%"><label for="bloodGroup">Blood Group:</label></td>
-                    <td width="30%">
-                        <select name="bloodgroup" id="bloodgroup" class="fieldinput_mandatory" requried>
+                    <td width="8%"><label for="seekerRequest">Seeker Request Type:</label></td>
+                    <td width="10%">
+                        <select name="seekerRequest" id="seekerRequest" class="fieldinput_mandatory" onchange="enablefetchbuttons();" required>
                             <option value="" disabled selected>Select</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
+                            <option value="newRequest">New Request</option>
+                            <option value="alreadyRequested">Already Requested</option>
                         </select>
                     </td>
+                    <td width="6%"><label for="seekerName" class="lbltext">Seeker Name:</label></td>
+                    <td width="10%"><input type="text" id="seekerName" class="fieldinput_mandatory" name="seekername" placeholder="Enter seeker name" required></td>
+                    <!-- Group city and blood group fields for easier manipulation -->
+                    <td  width="40%" colspan="4" id="cityBloodFields">
+                        <table>
+                            <tr>
+                                <td width="1.5%"><label for="city">City:</label></td>
+                                <td width="7%"><input type="text" id="city" class="fieldinput_mandatory" name="city" placeholder="Enter City" required></td>
+                                <td width="5%"><label for="bloodGroup">Blood Group:</label></td>
+                                <td width="15%">
+                                    <select name="bloodgroup" id="bloodgroup" class="fieldinput_mandatory" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td  width="30%" colspan="2" id="cityBloodFieldsReplace" style="display: none;"></td>
                 </tr>
-                
             </table>
         </fieldset>
         <table class="layoutMiniTable">
             <tr>
                 <td>
-                    <button type="button" onclick="javascript:return (commonaValidation() && fetchDonors());">Fetch Donors</button>
+                    <button type="button" id="fetchDonartDeatails"  onclick="javascript:return (validateSeekerFetchbtn() && fetchDonors());" >Fetch Donors</button>
+                </td>
+                <td>
+                    <button type="button" id="fetchSeekerRequestDeatails"  onclick="javascript:return (validateSeekerFetchbtn() && fetchDonors());" style="display: none;">Ftech Request Details</button>
+
                 </td>
             </tr>
         </table>
@@ -104,11 +127,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" onclick="sendAllEmails(userNameList,bloodGroupList,cityList,emailList,seekerName);">Send Email</button>
+                            <button type="button" id="sendMailbtn" class="btnEnable" onclick="sendAllEmails();">Send Email</button>
                         </td>
                     </tr>
                 </table>
         </div>
     </form>
+</div>
 </body>
 </html>
