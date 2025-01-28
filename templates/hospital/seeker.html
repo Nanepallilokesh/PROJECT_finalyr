@@ -58,42 +58,55 @@
         <fieldset>
             <table class="layoutMiniTable">
                 <tr>
-                    <td width="8%"><label for="seekerRequest">Seeker Request Type:</label></td>
-                    <td width="10%">
+                    <td width="12%"><label for="seekerRequest">Seeker Request Type:</label></td>
+                    <td width="85%">
                         <select name="seekerRequest" id="seekerRequest" class="fieldinput_mandatory" onchange="enablefetchbuttons();" required>
                             <option value="" disabled selected>Select</option>
                             <option value="newRequest">New Request</option>
                             <option value="alreadyRequested">Already Requested</option>
                         </select>
                     </td>
-                    <td width="6%"><label for="seekerName" class="lbltext">Seeker Name:</label></td>
-                    <td width="10%"><input type="text" id="seekerName" class="fieldinput_mandatory" name="seekername" placeholder="Enter seeker name" required></td>
-                    <!-- Group city and blood group fields for easier manipulation -->
-                    <td  width="40%" colspan="4" id="cityBloodFields">
-                        <table>
-                            <tr>
-                                <td width="1.5%"><label for="city">City:</label></td>
-                                <td width="7%"><input type="text" id="city" class="fieldinput_mandatory" name="city" placeholder="Enter City" required></td>
-                                <td width="5%"><label for="bloodGroup">Blood Group:</label></td>
-                                <td width="15%">
-                                    <select name="bloodgroup" id="bloodgroup" class="fieldinput_mandatory" required>
-                                        <option value="" disabled selected>Select</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td  width="30%" colspan="2" id="cityBloodFieldsReplace" style="display: none;"></td>
+                </tr>
+                <tr>
+                    <td width="10%"><label for="seekerName" class="lbltext">Seeker Name:</label></td>
+                    <td width="10%"><input type="text" id="seekerName" class="fieldinput_mandatory" name="seekerName" placeholder="Enter seeker name" required></td>
                 </tr>
             </table>
+            <div id="newRequestDiv">
+                <table class="layoutMiniTable">
+                    <tr>
+                        <!-- Group city and blood group fields for easier manipulation -->
+                        <td width="3%"><label for="city">City:</label></td>
+                        <td width="10%"><input type="text" id="city" class="fieldinput_mandatory" name="city" placeholder="Enter City" required></td>
+                    </tr>
+                    <tr>
+                        <td width="8%"><label for="bloodGroup">Blood Group:</label></td>
+                        <td width="59%">
+                        <select name="bloodgroup" id="bloodgroup" class="fieldinput_mandatory" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="A-">A-</option>
+                            <option value="A+">A+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="requestDetailsDiv" style="display: none;">
+                <table class="layoutMiniTable">
+                    <tr>
+                        
+                        <!-- Group city and blood group fields for easier manipulation -->
+                        <td width="6%"><label for="requestId" class="lbltext">Request ID:</label></td>
+                        <td width="74%"><input type="text" id="requestId" class="fieldinput" name="requestId" placeholder="Enter request ID" ></td>
+                        
+                    </tr>
+                </table>
+            </div>
         </fieldset>
         <table class="layoutMiniTable">
             <tr>
@@ -101,7 +114,7 @@
                     <button type="button" id="fetchDonartDeatails"  onclick="javascript:return (validateSeekerFetchbtn() && fetchDonors());" >Fetch Donors</button>
                 </td>
                 <td>
-                    <button type="button" id="fetchSeekerRequestDeatails"  onclick="javascript:return (validateSeekerFetchbtn() && fetchDonors());" style="display: none;">Ftech Request Details</button>
+                    <button type="button" id="fetchSeekerRequestDeatails"  onclick="javascript:return (validateSeekerFetchbtn() && fetchRequestedDonors());" style="display: none;">Ftech Request Details</button>
 
                 </td>
             </tr>
@@ -128,6 +141,34 @@
                     <tr>
                         <td>
                             <button type="button" id="sendMailbtn" class="btnEnable" onclick="sendAllEmails();">Send Email</button>
+                        </td>
+                    </tr>
+                </table>
+        </div>
+
+        <div id="fetchedRequestedDonars" style="display: none;">
+            <table border="1" id="donorDataTable1">
+                <thead>
+                    <tr>
+                        <th width="13%">Request Accepted</th>
+                        <th>Donar Name</th>
+                        <th>Blood Group</th>
+                        <th>City</th>
+                        <th>Email Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data rows will be inserted here -->
+                </tbody>
+
+                </table>
+                <table class="layoutMiniTable">
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" id="sendReturnMailbtn" class="btnEnable" onclick="sendEmailsToRemaining();">Send Thanks Email</button>
                         </td>
                     </tr>
                 </table>

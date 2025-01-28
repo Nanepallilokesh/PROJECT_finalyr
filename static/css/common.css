@@ -214,6 +214,33 @@ button:active {
     color: white;
 }
 
+#donorDataTable1 {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	align-items: center;
+}
+
+#donorDataTabl1 td, #donorDataTable1 th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#donorDataTable1 tr:nth-child(even){background-color: #f2f2f2;}
+
+#donorDataTable1 tr:hover {background-color: #ddd;}
+
+#donorDataTable1 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04cff7;
+    color: white;
+}
+
 .btnEnable {
     margin-left: 15px;
     font-size: 13px;
@@ -298,3 +325,28 @@ p {
     text-align: center;
 }
 
+.dynamicTable {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.dynamicTable td, .dynamicTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.dynamicTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.dynamicTable tr:hover {background-color: #ddd;}
+
+.dynamicTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04cff7;
+    color: white;
+}

@@ -31,26 +31,57 @@
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
+    <link rel="stylesheet" href="/static/css/common.css">
+
     <script src='/static/js/main.js'></script>
     <script src='/static/js/common.js'></script>
+    <script src="/static/js/donarList.js"></script>
 </head>
-<body>
-    <!-- Coins Redemption Form -->
-     <center>
-    <div class="container1">
-    <div class="form-box1" >
-        <h2>Coins Redemption</h2>
-        <form action="/coin_redemption" method="post">
-            <label for="donorname">Donor Name:</label>
-            <input type="text" id="donorname" name="donorname" placeholder="Enter donor Name" required>
-            <label for="donorcity">Donor City:</label>
-            <input type="text" id="donorcity" name="donorcity" placeholder="Enter donor City" required>
-            <label for="donorid">Donor ID:</label>
-            <input type="text" id="donorid" name="donorid" placeholder="Enter donor ID" required>
-            <input type="submit" value="Redeem Coins">
-        </form>
+<body class="menubody" onload="enablePoints();">
+    <div id="overlay-loader" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading...</p>
     </div>
+    <div id="main-content">
+    <form action="" method="POST">
+        <input type="hidden" name="userNameList"  />
+        <input type="hidden" name="bloodGroupList"  />
+        <input type="hidden" name="cityList" />
+        <input type="hidden" name="emailList" />
+        <table class="layoutMiniTable">
+            <tr>
+                <center>
+                    <td width="100%"><label for="title" id="title" class="lbltext"><h2>Coins Details</h2></label></td>
+                </center>
+            </tr>
+        </table>
+        <fieldset>
+            <table class="layoutMiniTable">
+                <tr>
+                    <td ><label for="donorId" class="lbltext">Donor Id:</label></td>
+                    <td ><input type="text" id="donorId" class="fieldinput_mandatory" name="donorId" placeholder="Enter Donor Id" required></td>
+                </tr>
+                <tr>
+                    <td ><label for="donarName" class="lbltext">Donor Name:</label></td>
+                    <td><input type="text" id="donarName" class="fieldinput_mandatory" name="donarName" placeholder="Enter Donor name" required></td>
+                </tr>
+                <tr>
+                    <td  id="point_label"><label for="points" class="lbltext">Available Points:</label></td>
+                    <td ><input type="text" id="points" class="fieldinput_readOnly" name="points"  ></td>
+                </tr>
+            </table>
+        </fieldset>
+        <table class="layoutMiniTable">
+            <tr>
+                <td>
+                    <button type="button" id="fetchDonartCoins"  onclick="javascript:return enablePoints() && fetchCoins();" >Fetch Donors</button>
+                </td>
+            </tr>
+        </table>
+        
+        
+    
+    </form>
 </div>
-</center>
 </body>
 </html>

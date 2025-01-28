@@ -1,5 +1,9 @@
+import random
+import string
+from datetime import date
 from flask import Flask,render_template,request,flash,redirect,url_for,session,jsonify
 import mysql.connector
+from mysql.connector import Error
 from werkzeug.security import generate_password_hash
 from email_sender import send_email
 from datafilter import match
@@ -183,8 +187,323 @@ def send_email_route():
 
     return jsonify({"message": "Email sent successfully!"}), 200
 
+@app.route('/storeRequestDetails', methods=['POST'])
+def storeRequestDetails():
+    # Get the data from the request
+    userName =  request.json.get('userName')
+    bloodGroup=  request.json.get('bloodGroup')
+    city=  request.json.get('city')
+    email=  request.json.get('email')
+    seekerName=  request.json.get('seekerName')
+    if not all([userName, bloodGroup, city, email, seekerName]):
+        return jsonify({"message": "All fields are required."}), 400
+    if(userName=='' or bloodGroup == '' or city == '' or email == '' or seekerName == ''):
+        return jsonify({"message": "All lists must have the some value."}), 400
+    # Ensure all lists are of the same length
+    if not (len(userName) == len(bloodGroup) == len(city) == len(email)):
+        return jsonify({"message": "All lists must have the same number of elements."}), 400
+
+    # Generate a random request ID
+    request_id = generate_random_id()
+
+    # Insert data into the requestSeekerDetails table
+    try:
+        # Insert data into the table
+        for i in range(len(userName)):
+            cursor.execute("""
+            INSERT INTO requestseekerdetails1 (requestId, userName, bloodGroup, city, email, seekerName)
+            VALUES (%s, %s, %s, %s, %s, %s)
+                """, (request_id, userName[i], bloodGroup[i], city[i], email[i], seekerName))
+
+        con.commit()  # Commit transaction
+
+
+        return jsonify({"message": "Successfully stored data!", "requestId": request_id}), 200
+
+    except Error as e:
+        print(f"Error: {e}")
+        return jsonify({"message": "Failed to Store Data", "error": str(e)}), 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
+@app.route('/sendReturnEmail', methods=['POST'])
+def sendReturnEmail():
+    data = request.json
+    email = data.get('to_email')
+    subject = data.get('subject')
+    body = data.get('body')
+    try:
+        # Use your preferred email-sending library (e.g., smtplib, boto3 SES)
+       
+       
+        send_email(email, subject, body)  # Custom function
+        return jsonify({"message": f"Email sent to {email}"}), 200
+    except Exception as e:
+        return jsonify({"message": "Failed to send email", "error": str(e)}), 500
+
+def generate_random_id(length=8):
+    """Generate a random alphanumeric ID."""
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+@app.route('/requestedDonar', methods=['GET', 'POST'])
+def requestedDonar():
+    try:
+        # Get seekername from the request
+        seekername = request.json.get('seekername')
+
+        # Use dictionary cursor to get results as dictionaries
+        cursor1 = con.cursor(dictionary=True)
+
+        # Query to fetch records based on seekername
+        query = """
+            SELECT userName AS username, bloodGroup AS blood_group, city, email
+            FROM requestseekerdetails1
+            WHERE seekerName = %s
+        """
+        cursor1.execute(query, [seekername])
+
+        # Fetch all records
+        result = cursor1.fetchall()
+
+        # Close the cursor and connection
+        cursor1.close()
+
+        # Extract data into separate lists
+        username = [record['username'] for record in result]
+        bloodgroup = [record['blood_group'] for record in result]
+        city = [record['city'] for record in result]
+        email = [record['email'] for record in result]
+
+        # Prepare the response data
+        data = {
+            "username": username,
+            "bloodgroup": bloodgroup,
+            "city": city,
+            "email": email
+        }
+
+        # Return the data as JSON
+        return jsonify(data), 200
+
+    except Error as e:
+        print(f"Error while fetching records: {e}")
+        return jsonify({"message": "Failed to fetch records", "error": str(e)}), 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
 @app.route('/Continue')
 def Continue():
     return render_template("Continue.html")
+
+@app.route('/updateRequestRecord', methods=['POST'])
+def update_request_record():
+    try:
+        # Get seekerName from the request
+        seeker_name = request.json.get('seekerName')
+
+        # Validate input
+        if not seeker_name:
+            return jsonify({"message": "seekerName is required"}), 400
+
+        # Query to delete records based on seekerName
+        query = """
+            DELETE FROM requestseekerdetails1
+            WHERE seekerName = %s
+        """
+        cursor.execute(query, [seeker_name])
+
+        # Commit the changes
+        con.commit()
+
+        # Check if any rows were deleted
+        if cursor.rowcount > 0:
+            message = f"Records for seekerName '{seeker_name}' deleted successfully!"
+        else:
+            message = f"No records found for seekerName '{seeker_name}'."
+
+        
+
+        # Return success response
+        return jsonify({"message": message}), 200
+
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+        return jsonify({"message": "Failed to update records", "error": str(e)}), 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
+@app.route('/updateDonarPoints', methods=['POST'])
+def update_donar_points():
+    try:
+        # Get details from the request
+        userName = request.json.get('userName')
+        bloodGroup = request.json.get('bloodGroup')
+        city = request.json.get('city')
+        email = request.json.get('email')
+
+        # Validate input
+        if not userName or not bloodGroup or not city or not email:
+            return jsonify({"message": "All fields (userName, bloodGroup, city, email) are required."}), 400
+
+        
+        # Query to fetch redeem points for the given userName
+        query_points = "SELECT max(coins) FROM userCoins WHERE userName = %s"
+        cursor.execute(query_points, [userName])
+        result_points = cursor.fetchone()
+
+        # Query to fetch userId for the given email
+        query_userId = "SELECT id FROM registered_users WHERE email = %s"
+        cursor.execute(query_userId, [email])
+        result_userId = cursor.fetchone()
+
+        # Check if both queries returned valid results
+        if result_userId:
+            # Extract values from the results
+            if result_points == None or result_points[0] == None:
+                current_points = 0
+            else:
+                current_points = int(result_points[0]) # Ensure redeempoint is treated as an integer
+            userId = int(result_userId[0])         # Ensure userId is treated as an integer
+
+            # Update redeem points
+            new_points = current_points + 100
+
+            # Insert updated record into donarsHistory
+            current_date = date.today()
+            query_insert = """
+                INSERT INTO donarsHistory (userId, userName, bloodGroup, city, email,date)
+                VALUES (%s, %s, %s, %s, %s,%s)
+            """
+            cursor.execute(query_insert, (userId, userName, bloodGroup, city, email,current_date))
+            #con.commit()  # Commit the transaction
+            if current_points == 0:
+                query = """
+                    INSERT INTO userCoins (userId,userName,bloodGroup,city,email,coins)
+                    VALUES(%s, %s, %s, %s, %s,%s)
+                    """
+                cursor.execute(query,(userId, userName, bloodGroup, city, email,new_points))
+                con.commit()
+            else:
+                query = """
+                    UPDATE userCoins SET coins = %s WHERE userId = %s;
+                    """
+                cursor.execute(query,[new_points,userId])
+                con.commit()
+
+            return jsonify({
+                "message": f"Redeem points updated for user '{userName}'.",
+                "userName": userName,
+                "newPoints": new_points
+            }), 200
+        else:
+            return jsonify({"message": "No matching records found for the provided userName or email."}), 404
+
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+        return jsonify({"message": "Failed to update records", "error": str(e)}), 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
+
+@app.route('/fetchCoin', methods=['POST'])
+def fetch_Coins():
+    try:
+        # Get details from the request
+        userId = request.json.get('userId')
+        userName = request.json.get('userName')
+
+        print('userId:',userId)
+        print('userName:',userName)
+
+        # Validate input
+        if not userName or not userId :
+            return jsonify({"message": "All fields (userName, userId) are required."}), 400
+
+        
+        # Query to fetch redeem points for the given userName
+        query_points = "SELECT coins FROM userCoins WHERE userName = %s and userId = %s"
+        cursor.execute(query_points, [userName,userId])
+        result_points = cursor.fetchone()
+
+        print("result:",result_points)
+        if result_points:
+            return jsonify({
+                "message": f"Redeem points updated for user '{userName}'.",
+                "newPoints": result_points[0]
+                }), 200
+        else:
+            return jsonify({"message": "No matching records found for the provided userName or email."}), 404
+
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+        return jsonify({"message": "Failed to update records", "error": str(e)}), 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
+@app.route('/fetchUserHistoryDetails', methods=['GET', 'POST'])
+def fetch_User_History():
+    try:
+        # Get seekername from the request
+        userId = request.json.get('userId')
+        userName = request.json.get('userName')
+
+        # Use dictionary cursor to get results as dictionaries
+        print('userId:',userId)
+        print('userName:',userName)
+
+        cursor1 = con.cursor(dictionary=True)
+
+        # Query to fetch records based on seekername
+        query = """
+            SELECT userName, bloodGroup , city, email ,date
+            FROM donarsHistory
+            WHERE userName = %s
+        """
+        cursor1.execute(query, [userName])
+
+        # Fetch all records
+        result = cursor1.fetchall()
+
+        print("result:")
+        print(result)
+    
+
+        # Extract data into separate lists
+        userName = [record['userName'] for record in result]
+        bloodGroup = [record['bloodGroup'] for record in result]
+        city = [record['city'] for record in result]
+        email = [record['email'] for record in result]
+        date = [record['date'] for record in result]
+
+        # Prepare the response data
+        data = {
+            "userName": userName,
+            "bloodGroup": bloodGroup,
+            "city": city,
+            "email": email,
+            "date" : date
+        }
+
+        # Return the data as JSON
+        return jsonify(data), 200
+
+    except Error as e:
+        print(f"Error while fetching records: {e}")
+        return jsonify({"message": "Failed to fetch records", "error": str(e)}), 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(debug=True)
