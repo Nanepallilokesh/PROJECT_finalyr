@@ -1,0 +1,9 @@
+age,gender,side_effects,health_conditions,preferences,meal
+25,male,dizziness,None,non-veg,Spinach smoothie
+45,female,fatigue,diabetes,veg,Lentil soup
+30,male,nausea,None,veg,Boiled eggs
+60,female,fatigue,hypertension,veg,Vegetable stir-fry
+50,male,None,heart disease,non-veg,Grilled chicken
+35,female,dizziness,anemia,veg,Iron-rich salad
+28,male,None,None,vegan,Quinoa bowl
+22,female,nausea,None,veg,Fruit salad

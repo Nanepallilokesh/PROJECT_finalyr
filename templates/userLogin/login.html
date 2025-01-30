@@ -39,20 +39,49 @@
 
         <span class="bottom_text">Don't have an account? <label for="register_toggle" class="swtich">Sign Up</label> </span>
         </form>
-        <form class="form">
+        <form class="form" action="/Register" method="POST">
         <span class="title">Sign Up</span>
         <div class="form_control">
-            <input type="text" class="input" required="">
+            <input type="text" class="input" name="username" required="">
             <label class="label">Username</label>
         </div>
+        
         <div class="form_control">
-            <input type="email" class="input" required="">
+            <input type="email" class="input" name="email" required="">
             <label class="label">Email</label>
         </div>
         <div class="form_control">
-            <input type="password" class="input" required="">
-            <label class="label">Password</label>
+            <input type="number" class="input" name="phone_number" required="">
+            <label class="label">Phone Number</label>
         </div>
+        <div class="form_control">
+            <input type="text" class="input" name="city" required="">
+            <label class="label">city</label>
+        </div>
+        <div class="form_control">
+           
+            <select name="blood_group" id="bloodGroup" class="input1"  required="">
+                <option value="" disabled selected></option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+            <label for="bloodGroup" class="label">Blood Group</label>
+        </div>       
+        <div class="form_control">
+            <input type="password" class="input" name="password" required="">
+            <label class="label">Create Password</label>
+        </div>
+        <div class="form_control">
+            <input type="password" class="input" name="re_password" required="">
+            <label class="label">confirm Password</label>
+        </div>
+        
         <button>Sign Up</button>
 
         <span class="bottom_text">Already have an account? <label for="register_toggle" class="swtich">Sign In</label> </span>

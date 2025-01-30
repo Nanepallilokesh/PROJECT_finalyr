@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Recommendations</title>
+    <style>
+        .meal{
+            color:blue;
+            text-align:center;
+            font-size:25px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="meal">
+    <h1>Recommended Meals</h1>
+    <ul>
+        {% for meal in meals %}
+            <li>{{ meal }}</li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

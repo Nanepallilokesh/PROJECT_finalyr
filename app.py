@@ -7,6 +7,9 @@ from mysql.connector import Error
 from werkzeug.security import generate_password_hash
 from email_sender import send_email
 from datafilter import match
+import pickle
+import numpy as np
+
 app = Flask(__name__)
 
 
@@ -33,7 +36,9 @@ def index():
 @app.route('/Home')
 def Home():
     return render_template("home.html")
-
+@app.route('/Diet')
+def Diet():
+    return render_template("dietSuggest.html")
 @app.route('/About')
 def About():
     return render_template("about.html")
@@ -91,7 +96,7 @@ def Login():
             user=cursor.fetchone()
             if user:
                 session['logged_in'] = True
-                return render_template("user_dashboard.html")
+                return render_template("index.html")
             else:
                 error = "Invalid username or password for donar login"
     return error
@@ -108,16 +113,18 @@ def Register():
         password=request.form.get('password').strip()
         re_password=request.form.get('re_password').strip()
         if password!=re_password:
-            return "passwords not matched!!"
+            return "password not matched!!"
         else:
             try:
                 session['logged_in'] = True
+                print(session['logged_in'])
                 cursor.execute("""Insert into registered_users(username,email,phone_number,city,blood_group,password) values(%s,%s,%s,%s,%s,%s)""",(username,email,phone_number,city,blood_group,password))
                 con.commit()
-                return render_template('user_dashboard.html ')
+                return render_template('index.html')
             except mysql.connector.Error as err:
                 return f"Error: {err}",500
-    return render_template("registration_donar.html")   
+            
+    return render_template("/userLogin/login.html")   
 
 @app.route('/Dashboard', methods=['GET', 'POST'])
 def Dashboard():
@@ -125,8 +132,8 @@ def Dashboard():
 
 @app.route('/Logout')
 def Logout():
-    session.pop('logged_in', None) 
-    return redirect(url_for('index'))
+    session['logged_in']=False
+    return render_template("index.html")
 
 @app.route('/Contact1',methods=['GET', 'POST'])
 def Contact1():
@@ -504,6 +511,76 @@ def fetch_User_History():
     except Exception as e:
         print(f"Unexpected error: {e}")
         return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
+
+
+# Step 1: Load the trained model and encoders
+model = pickle.load(open('donor_meal_model.pkl', 'rb'))
+encoders = {
+    'gender': pickle.load(open('gender_encoder.pkl', 'rb')),
+    'side_effects': pickle.load(open('side_effects_encoder.pkl', 'rb')),
+    'health_conditions': pickle.load(open('health_conditions_encoder.pkl', 'rb')),
+    'preferences': pickle.load(open('preferences_encoder.pkl', 'rb')),
+    'meal': pickle.load(open('meal_encoder.pkl', 'rb'))
+}
+
+
+@app.route('/recommend_food', methods=['POST'])
+def recommend_food():
+    plan=''
+    if request.method=='POST':
+        plan=request.form.get('diet_plan')
+        
+    if plan=='no':
+        return render_template('home.html')
+    else:
+        try:
+            # Get input data from the form
+            age = int(request.form['age'])
+            gender = encoders['gender'].transform([request.form['gender']])[0]
+            
+            # Handle missing side effects and health conditions
+            side_effects = request.form.get('side_effects', '')
+            health_conditions = request.form.get('health_conditions', '')
+            
+            # If side_effects or health_conditions are not provided, set to "None" or a neutral value
+            side_effects = side_effects if side_effects else 'None'
+            health_conditions = health_conditions if health_conditions else 'None'
+
+            # Encode categorical data
+            side_effects_encoded = encoders['side_effects'].transform([side_effects])[0]
+            health_conditions_encoded = encoders['health_conditions'].transform([health_conditions])[0]
+            
+            # Handle food preferences
+            preferences = encoders['preferences'].transform([request.form['preferences']])[0]
+            
+            # Check if diet plan is required
+            diet_plan = request.form.get('diet_plan')
+            if diet_plan == 'no':
+                return redirect('/')  # Redirect back to the home page if 'No' is selected
+
+            # Prepare data for prediction
+            if side_effects == 'None' or health_conditions == 'None':
+                # Use only age and preferences if side_effects and health_conditions are 'None'
+                input_features = np.array([[age, gender, preferences]])
+            else:
+                # Use all available features
+                input_features = np.array([[age, gender, side_effects_encoded, health_conditions_encoded, preferences]])
+
+            # Get the model's probability scores for all classes (meals)
+            probabilities = model.predict_proba(input_features)[0]
+
+            # Find the top 3 meals based on probabilities
+            top_indices = np.argsort(probabilities)[-3:][::-1]  # Indices of top 3 meals
+            top_meals = [encoders['meal'].inverse_transform([idx])[0] for idx in top_indices]
+
+            # Render results in the HTML template
+            return render_template('dietResults.html', meals=top_meals)
+
+        except Exception as e:
+            return jsonify({'error': str(e)})
+
+       
 
 if __name__ == "__main__":
     app.run(debug=True)

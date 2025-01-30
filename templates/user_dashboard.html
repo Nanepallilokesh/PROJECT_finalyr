@@ -22,87 +22,16 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src='/static/js/main.js'></script>
+    <script src='/static/js/common.js'></script>
 
 </head>
 
-<body>
-    <!-- Topbar Start -->
-    <div class="container-fluid py-2 border-bottom d-none d-lg-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-decoration-none text-body pe-3" href=""><i class="bi bi-telephone me-2"></i>+ 1234567899</a>
-                        <span class="text-body">|</span>
-                        <a class="text-decoration-none text-body px-3" href=""><i class="bi bi-envelope me-2"></i>blood@example.com</a>
-                    </div>
-                </div>
-                <div class="col-md-6 text-center text-lg-end">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a class="text-body px-2" href="">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a class="text-body ps-2" href="">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top bg-white shadow-sm">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-                <a href="{{url_for('index')}}" class="navbar-brand">
-                    <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>BLOOD DONATION</h1>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                       
-                        {% if session.get('logged_in') != True %}
-                        <a href="{{url_for('index')}}"  class="nav-item nav-link active">Home</a>
-                        <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
-                        <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
-                        <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
-                        <!-- Login Button only visible if the user is not logged in -->
-                        <a onclick="showModal()" class="nav-item nav-link">Login</a>
-                        {% else %}
-                        <!-- Logout Button when the user is logged in -->
-                        <a href="{{url_for('Dashboard')}}"  class="nav-item nav-link active">Home</a>
-                        <a href="{{ url_for('About') }}" class="nav-item nav-link">About</a>
-                        <a href="{{ url_for('Service') }}" class="nav-item nav-link">Service</a>
-                        <a href="{{ url_for('Contact') }}" class="nav-item nav-link">Contact</a>
-                        <a href="{{ url_for('Logout') }}" class="nav-item nav-link">Logout</a>
-                        <svg xmlns="http://www.w3.org/2000/svg" width=20px viewBox="0 0 448 512" style="margin-left: 40px; margin-right:-100px;">
-                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
-                        </svg>
-                        {% endif %}
-                        
-                        
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+<body onload="openHome('Home');">
+    
     <!-- Navbar End -->
-
-        <!-- Hero Start -->
+    
+    <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row justify-content-start">

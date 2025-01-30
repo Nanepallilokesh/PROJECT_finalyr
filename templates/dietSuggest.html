@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Feedback & Diet Plan</title>
+    <link rel="stylesheet" href="./static/css/diet.css"> 
+    <script>
+        function toggleDietInputs() {
+            const dietPlan = document.querySelector('input[name="diet_plan"]:checked');
+            const additionalInputs = document.getElementById('additional-inputs');
+            if (dietPlan && dietPlan.value === 'yes') {
+                additionalInputs.classList.remove('hidden');
+            } else {
+                additionalInputs.classList.add('hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Donor Feedback & Diet Plan</h2>
+        <form action="/recommend_food" method="POST">
+            <div class="form-group">
+                <label for="donor-name">Donor Name:</label>
+                <input type="text" id="donor-name" name="donor_name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="donor-id">Donor ID:</label>
+                <input type="text" id="donor-id" name="donor_id" placeholder="Enter your donor ID" required>
+            </div>
+
+            <div class="form-group">
+                <label>Do you want a diet plan?</label>
+                <label><input type="radio" name="diet_plan" value="yes" onclick="toggleDietInputs()"> Yes</label>
+                <label><input type="radio" name="diet_plan" value="no" onclick="toggleDietInputs()"> No</label>
+            </div>
+
+            <div id="additional-inputs" class="hidden">
+                <label for="age">Age:</label>
+        <input type="number" id="age" name="age" ><br><br>
+        <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+    </div>
+    <div class="form-group">
+        <label for="side_effects">Side Effects:</label>
+        <select id="side_effects" name="side_effects" >
+            <option value="None">None</option>
+            <option value="dizziness">Dizziness</option>
+            <option value="fatigue">Fatigue</option>
+            <option value="nausea">Nausea</option>
+        </select><br><br>
+    </div>
+    <div class="form-group">
+        <label for="health_conditions">Health Conditions:</label>
+        <select id="health_conditions" name="health_conditions" >
+            <option value="None">None</option>
+            <option value="anemia">Anemia</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="hypertension">Hypertension</option>
+            <option value="heart disease">Heart Disease</option>
+        </select><br><br>
+    </div>
+    <div class="form-group">
+        <label for="preferences">Food Preferences:</label>
+        <select id="preferences" name="preferences" >
+            <option value="" disabled selected>select</option>
+            <option value="veg">Vegetarian</option>
+            <option value="non-veg">Non-Vegetarian</option>
+            <option value="vegan">Vegan</option>
+        </select><br><br>
+    </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -30,12 +30,11 @@ def match(targetBloodGroup,targetCity):
     # Close the connection
     engine.dispose()
 
-    #print(df)
     df = df.dropna(subset=['blood_group'])
     label_encoder = LabelEncoder()
     df['blood_group_encoded'] = label_encoder.fit_transform(df['blood_group'])
 
-    #print(df)
+   
 
     target_blood_group = targetBloodGroup
 
@@ -52,9 +51,6 @@ def match(targetBloodGroup,targetCity):
     
 
 
-    # print("1::",df['blood_group_encoded'].value_counts())
-    # print("2::",df.head())
-    # print("3::",df['blood_group_encoded'].unique())
     # Features and target
     X = df[['username', 'city', 'email']]  # Features
     y = df['blood_group_encoded']  # Target
@@ -81,7 +77,7 @@ def match(targetBloodGroup,targetCity):
     y_pred = svm_model.predict(X_test)
 
     # Evaluate the model
-    #print("Accuracy:", accuracy_score(y_test, y_pred))
+    print("Accuracy:", accuracy_score(y_test, y_pred))
 
     # Filter for a specific blood group (e.g., 'O+')
    
