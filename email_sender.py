@@ -26,7 +26,6 @@ def send_email(to_email, subject, body):
         text = msg.as_string()
         server.sendmail(sender_email, to_email, text)
 
-        print(f"Email successfully sent to {to_email}")
     except Exception as e:
         print(f"Failed to send email: {str(e)}")
     finally:

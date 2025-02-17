@@ -1,0 +1,11 @@
+age,gender,preferences,side_effects,health_conditions,meal
+25,male,veg,None,None,"Salad, Soup, Rice"
+30,female,non-veg,dizziness,None,"Grilled Chicken, Salad"
+22,female,vegan,None,anemia,"Tofu Stir Fry, Smoothie"
+28,male,veg,fatigue,diabetes,"Veg Curry, Rice, Lentils"
+35,male,non-veg,nausea,hypertension,"Chicken Curry, Rice"
+40,female,veg,None,heart disease,"Veg Salad, Soup"
+50,male,vegan,fatigue,None,"Quinoa Salad, Soup"
+18,female,non-veg,None,anemia,"Pasta, Mixed Veggies"
+45,male,veg,nausea,diabetes,"Grilled Fish, Veggies"
+60,female,vegan,None,hypertension,"Fruit Salad, Veg Wrap"

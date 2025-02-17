@@ -156,7 +156,7 @@ function sendEmailsToRemaining() {
             // Check if all requests are complete
             if (completedRequests == userName.length) {
                 if (failed.length == 0) {
-                    alert("Successfully email sent to all the Donars");
+                    alert("Successfully email sent to all the Donars--");
                     document.getElementById('sendReturnMailbtn').className='btnDisable';
                     document.getElementById('sendReturnMailbtn').disabled='true';
                     document.getElementById('sendReturnMailbtn').readOnly='true';
@@ -522,7 +522,7 @@ function updateRequestedDetails(seekerName){
         if (response.ok) {
             alert('Records Updated successfully');
         } else {
-            alert('Failed to update records'); // Add failed email to the list
+            alert('Failed to update records in 525 line'); // Add failed email to the list
         }
 
         document.getElementById('overlay-loader').style.display = 'none';
@@ -551,7 +551,7 @@ function updateDonarPoints(userName,bloodGroup,city,email){
         if (response.ok) {
             alert('Records Updated successfully');
         } else {
-            alert('Failed to update records'); // Add failed email to the list
+            alert('Failed to update records in 554 donarList'); // Add failed email to the list
         }
         document.getElementById('overlay-loader').style.display = 'none';
     })

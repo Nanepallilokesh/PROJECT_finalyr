@@ -16,15 +16,19 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 #database Configuration
 db_config={
-    'host':'localhost',
+    'host':'127.0.0.1',
     'user':'root',
     'password':'Lokesh4321.',
-    'database':'BloodDonation'
+    'database':'BloodDonation',
+    'ssl_disabled': True,
+    'use_pure':True,
 }
 
 #Establish connection
 con=mysql.connector.connect(**db_config)
 cursor=con.cursor()
+cursor2=con.cursor()
+
 
 
 
@@ -232,7 +236,7 @@ def storeRequestDetails():
         return jsonify({"message": "Failed to Store Data", "error": str(e)}), 500
 
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print(f"Unexpected error-1: {e}")
         return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
 
 @app.route('/sendReturnEmail', methods=['POST'])
@@ -299,7 +303,7 @@ def requestedDonar():
         return jsonify({"message": "Failed to fetch records", "error": str(e)}), 500
 
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print(f"Unexpected error-2: {e}")
         return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
 
 @app.route('/Continue')
@@ -339,85 +343,91 @@ def update_request_record():
 
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
-        return jsonify({"message": "Failed to update records", "error": str(e)}), 500
+        return jsonify({"message": "Failed to update records in up", "error": str(e)}), 500
 
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print(f"Unexpected error-3: {e}")
         return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
 
 @app.route('/updateDonarPoints', methods=['POST'])
-def update_donar_points():
+def updateDonarPoints():
+    #cursor=con.cursor()
+    print("hai in updateDonarPoints")
+    userName = request.json.get('userName')
+    bloodGroup = request.json.get('bloodGroup')
+    city = request.json.get('city')
+    email = request.json.get('email')
+
+        # if not userName or not bloodGroup or not city or not email:
+        #     return jsonify({"message": "All fields are required."}), 400
     try:
-        # Get details from the request
-        userName = request.json.get('userName')
-        bloodGroup = request.json.get('bloodGroup')
-        city = request.json.get('city')
-        email = request.json.get('email')
+        cursor2.execute("SELECT coins FROM usercoins WHERE userName = %s", (userName,))
+        result_coins = cursor2.fetchone()
+        print("result_coins",result_coins)
+        if result_coins is None:
+            coins = 0  # Default if no record found
+        else:
+            coins_data = result_coins[0]
 
-        # Validate input
-        if not userName or not bloodGroup or not city or not email:
-            return jsonify({"message": "All fields (userName, bloodGroup, city, email) are required."}), 400
+            if isinstance(coins_data, (bytes, bytearray)) and len(coins_data) > 0:
+                coins = int.from_bytes(coins_data, byteorder="big")
+            else:
+                coins = int(coins_data) if coins_data else 0  # Default to 0 if empty
 
+        print("Raw coins data:", coins_data, type(coins_data))
+        print("coins is", coins)
+    except Exception as e:
+        print(f"Unexpected error-4(2): {e}")
+        return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
+
+    try:  
         
-        # Query to fetch redeem points for the given userName
-        query_points = "SELECT max(coins) FROM userCoins WHERE userName = %s"
-        cursor.execute(query_points, [userName])
-        result_points = cursor.fetchone()
+            print(f"Fetching user ID for email: {email}")
+            print("current_points",coins)
+            cursor = con.cursor()
+            cursor.execute("SELECT id FROM registered_users WHERE email = %s", (email,))
+            result_userId = cursor.fetchone()
 
-        # Query to fetch userId for the given email
-        query_userId = "SELECT id FROM registered_users WHERE email = %s"
-        cursor.execute(query_userId, [email])
-        result_userId = cursor.fetchone()
+            if not result_userId:
+                return jsonify({"message": "No matching user found."}), 404
 
-        # Check if both queries returned valid results
-        if result_userId:
-            # Extract values from the results
-            if result_points == None or result_points[0] == None:
-                current_points = 0
+            userId = int(result_userId[0])
+            new_points = coins + 100  # Add 100 to the existing coins
+
+            print("Updating donor history...")
+            cursor.execute("""
+                INSERT INTO donarsHistory (userId, userName, bloodGroup, city, email, date)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (userId, userName, bloodGroup, city, email, date.today()))
+
+            if coins == 0:
+                print("Inserting new record in userCoins...")
+                cursor.execute("""
+                    INSERT INTO usercoins (userId, userName, bloodGroup, city, email, coins)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                """, (userId, userName, bloodGroup, city, email, new_points))
             else:
-                current_points = int(result_points[0]) # Ensure redeempoint is treated as an integer
-            userId = int(result_userId[0])         # Ensure userId is treated as an integer
+                print(f"Updating userCoins with new points: {new_points}")
+                cursor.execute("UPDATE usercoins SET coins = %s WHERE userId = %s", (new_points, userId))
 
-            # Update redeem points
-            new_points = current_points + 100
-
-            # Insert updated record into donarsHistory
-            current_date = date.today()
-            query_insert = """
-                INSERT INTO donarsHistory (userId, userName, bloodGroup, city, email,date)
-                VALUES (%s, %s, %s, %s, %s,%s)
-            """
-            cursor.execute(query_insert, (userId, userName, bloodGroup, city, email,current_date))
-            #con.commit()  # Commit the transaction
-            if current_points == 0:
-                query = """
-                    INSERT INTO userCoins (userId,userName,bloodGroup,city,email,coins)
-                    VALUES(%s, %s, %s, %s, %s,%s)
-                    """
-                cursor.execute(query,(userId, userName, bloodGroup, city, email,new_points))
-                con.commit()
-            else:
-                query = """
-                    UPDATE userCoins SET coins = %s WHERE userId = %s;
-                    """
-                cursor.execute(query,[new_points,userId])
-                con.commit()
+            con.commit()
+            print("Database updated successfully.")
 
             return jsonify({
                 "message": f"Redeem points updated for user '{userName}'.",
                 "userName": userName,
                 "newPoints": new_points
             }), 200
-        else:
-            return jsonify({"message": "No matching records found for the provided userName or email."}), 404
 
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
-        return jsonify({"message": "Failed to update records", "error": str(e)}), 500
+        return jsonify({"message": "Database error", "error": str(e)}), 500
 
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print(f"Unexpected error-4: {e}")
         return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
+
 
 
 @app.route('/fetchCoin', methods=['POST'])
@@ -451,10 +461,10 @@ def fetch_Coins():
 
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
-        return jsonify({"message": "Failed to update records", "error": str(e)}), 500
+        return jsonify({"message": "Failed to update records in fetch_coins", "error": str(e)}), 500
 
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print(f"Unexpected error-5: {e}")
         return jsonify({"message": "An unexpected error occurred", "error": str(e)}), 500
 
 @app.route('/fetchUserHistoryDetails', methods=['GET', 'POST'])
@@ -524,61 +534,54 @@ encoders = {
     'meal': pickle.load(open('meal_encoder.pkl', 'rb'))
 }
 
-
 @app.route('/recommend_food', methods=['POST'])
 def recommend_food():
-    plan=''
-    if request.method=='POST':
-        plan=request.form.get('diet_plan')
-        
-    if plan=='no':
-        return render_template('home.html')
-    else:
-        try:
-            # Get input data from the form
-            age = int(request.form['age'])
-            gender = encoders['gender'].transform([request.form['gender']])[0]
-            
-            # Handle missing side effects and health conditions
-            side_effects = request.form.get('side_effects', '')
-            health_conditions = request.form.get('health_conditions', '')
-            
-            # If side_effects or health_conditions are not provided, set to "None" or a neutral value
-            side_effects = side_effects if side_effects else 'None'
-            health_conditions = health_conditions if health_conditions else 'None'
+    try:
+        # Handle the diet plan selection
+        plan = request.form.get('diet_plan', '')
+        if plan == 'no':
+            return render_template('home.html')
 
-            # Encode categorical data
+        # Get input data from the form
+        age = int(request.form.get('age', 0))  # Default age to 0 if missing
+        gender = request.form.get('gender', 'male')  # Default gender if not provided
+        gender_encoded = encoders['gender'].transform([gender])[0]
+
+        # Handle preferences
+        preferences = request.form.get('preferences', 'veg')  # Default to 'veg' if not provided
+        preferences_encoded = encoders['preferences'].transform([preferences])[0]
+
+        # Handle side effects and health conditions
+        side_effects = request.form.get('side_effects', 'None')  # Default to 'None' if not provided
+        if side_effects == '':
+            side_effects = 'None'  # Treat empty string as 'None'
+        side_effects_encoded = 0  # Default encoded value for 'None'
+        if side_effects != 'None':
             side_effects_encoded = encoders['side_effects'].transform([side_effects])[0]
+
+        health_conditions = request.form.get('health_conditions', 'None')  # Default to 'None' if not provided
+        if health_conditions == '':
+            health_conditions = 'None'  # Treat empty string as 'None'
+        health_conditions_encoded = 0  # Default encoded value for 'None'
+        if health_conditions != 'None':
             health_conditions_encoded = encoders['health_conditions'].transform([health_conditions])[0]
-            
-            # Handle food preferences
-            preferences = encoders['preferences'].transform([request.form['preferences']])[0]
-            
-            # Check if diet plan is required
-            diet_plan = request.form.get('diet_plan')
-            if diet_plan == 'no':
-                return redirect('/')  # Redirect back to the home page if 'No' is selected
 
-            # Prepare data for prediction
-            if side_effects == 'None' or health_conditions == 'None':
-                # Use only age and preferences if side_effects and health_conditions are 'None'
-                input_features = np.array([[age, gender, preferences]])
-            else:
-                # Use all available features
-                input_features = np.array([[age, gender, side_effects_encoded, health_conditions_encoded, preferences]])
+        # Ensure the input array always has 5 features
+        input_features = np.array([[age, gender_encoded, preferences_encoded, side_effects_encoded, health_conditions_encoded]])
 
-            # Get the model's probability scores for all classes (meals)
-            probabilities = model.predict_proba(input_features)[0]
+        # Get the model's probability scores for all classes (meals)
+        probabilities = model.predict_proba(input_features)[0]
 
-            # Find the top 3 meals based on probabilities
-            top_indices = np.argsort(probabilities)[-3:][::-1]  # Indices of top 3 meals
-            top_meals = [encoders['meal'].inverse_transform([idx])[0] for idx in top_indices]
+        # Find the top 3 meals based on probabilities
+        top_indices = np.argsort(probabilities)[-3:][::-1]  # Indices of top 3 meals
+        top_meals = [encoders['meal'].inverse_transform([idx])[0] for idx in top_indices]
 
-            # Render results in the HTML template
-            return render_template('dietResults.html', meals=top_meals)
+        # Render results in the HTML template
+        return render_template('dietResults.html', meals=top_meals)
 
-        except Exception as e:
-            return jsonify({'error': str(e)})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
 
        
 
